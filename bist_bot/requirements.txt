@@ -1,0 +1,10 @@
+yfinance
+pandas
+pandas-ta
+numpy
+rich
+schedule
+PySide6
+matplotlib
+pytest
+pytest-qt
