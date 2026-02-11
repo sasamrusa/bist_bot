@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-02-11T16:39:10.204680",
+  "interval": "1d",
+  "count": 3,
+  "decisions": [
+    {
+      "symbol": "ASELS.IS",
+      "probability_up": 0.5407301264635811,
+      "signal": "HOLD",
+      "price": 296.0,
+      "atr": 12.68455185023504,
+      "suggested_qty": 0.0,
+      "drift_score": 0.5192187922863133
+    },
+    {
+      "symbol": "AKBNK.IS",
+      "probability_up": 0.5373327750695616,
+      "signal": "HOLD",
+      "price": 84.44999694824219,
+      "atr": 2.85012707359351,
+      "suggested_qty": 0.0,
+      "drift_score": 0.40275927800455535
+    },
+    {
+      "symbol": "EREGL.IS",
+      "probability_up": 0.5331448517767845,
+      "signal": "HOLD",
+      "price": 29.280000686645508,
+      "atr": 0.7798104985109567,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3038426476109313
+    }
+  ]
+}

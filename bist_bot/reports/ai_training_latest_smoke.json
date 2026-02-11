@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260211_163852.joblib",
+    "model_backend": "sklearn_hgb",
+    "rows": 3810,
+    "symbols": 8,
+    "folds": 3,
+    "avg_fold_auc": 0.4965825822518703,
+    "avg_fold_policy_return_pct": 2.5622951337859816
+  },
+  "folds": [
+    {
+      "fold_id": 1,
+      "train_start": "2024-03-08",
+      "train_end": "2025-03-07",
+      "test_start": "2025-03-10",
+      "test_end": "2025-06-09",
+      "train_rows": 1986,
+      "test_rows": 472,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.4470338983050847,
+        "f1": 0.5583756345177665,
+        "auc": 0.47231924712695683
+      },
+      "policy": {
+        "avg_symbol_return_pct": 0.776880479341109,
+        "median_symbol_return_pct": 0.7622521809118377,
+        "trades": 10,
+        "win_rate": 50.0,
+        "avg_trade_return_pct": 0.7100746686336779
+      }
+    },
+    {
+      "fold_id": 2,
+      "train_start": "2024-06-08",
+      "train_end": "2025-06-07",
+      "test_start": "2025-06-10",
+      "test_end": "2025-09-09",
+      "train_rows": 1976,
+      "test_rows": 520,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5423076923076923,
+        "f1": 0.65,
+        "auc": 0.464075329566855
+      },
+      "policy": {
+        "avg_symbol_return_pct": 0.0,
+        "median_symbol_return_pct": 0.0,
+        "trades": 0,
+        "win_rate": 0.0,
+        "avg_trade_return_pct": 0.0
+      }
+    },
+    {
+      "fold_id": 3,
+      "train_start": "2024-09-08",
+      "train_end": "2025-09-07",
+      "test_start": "2025-09-10",
+      "test_end": "2025-12-09",
+      "train_rows": 2000,
+      "test_rows": 512,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.498046875,
+        "f1": 0.6568758344459279,
+        "auc": 0.5533531700617991
+      },
+      "policy": {
+        "avg_symbol_return_pct": 6.910004922016835,
+        "median_symbol_return_pct": 4.902890009421923,
+        "trades": 8,
+        "win_rate": 75.0,
+        "avg_trade_return_pct": 6.910004922016835
+      }
+    }
+  ],
+  "skipped_symbols": [],
+  "symbol_to_id": {
+    "AKBNK.IS": 0,
+    "ARCLK.IS": 1,
+    "ASELS.IS": 2,
+    "BIMAS.IS": 3,
+    "DOHOL.IS": 4,
+    "EREGL.IS": 5,
+    "FROTO.IS": 6,
+    "GARAN.IS": 7
+  }
+}

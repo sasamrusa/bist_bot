@@ -68,3 +68,23 @@ Run via module paths to avoid import errors:
 
 *   GUI: `py -m bist_bot.gui_app`
 *   CLI bot loop: `py -m bist_bot.main`
+
+## AI Trading Pipeline
+
+Train AI model (walk-forward validation + model registry):
+
+```bash
+py -m bist_bot.ai_pipeline.train --years 10 --interval 1d --calibrate
+```
+
+Run inference with latest registered model:
+
+```bash
+py -m bist_bot.ai_pipeline.infer --interval 1d
+```
+
+Run live paper loop with AI model:
+
+```bash
+py -m bist_bot.main_ai
+```
