@@ -1,15 +1,24 @@
 import pandas as pd
 import pandas_ta as ta
-from typing import Tuple
 
 from bist_bot.strategies.base_strategy import BaseStrategy
 from bist_bot.core.config import (
+    DATA_INTERVAL,
     RSI_PERIOD, RSI_OVERBOUGHT, RSI_OVERSOLD,
     MACD_FAST_PERIOD, MACD_SLOW_PERIOD, MACD_SIGNAL_PERIOD,
     TREND_EMA_FAST_PERIOD, TREND_EMA_SLOW_PERIOD,
     BBANDS_PERIOD, BBANDS_STD,
     ATR_PERIOD,
     SIGNAL_SCORE_THRESHOLD,
+    ENABLE_VOLUME_FILTER,
+    VOLUME_SMA_PERIOD,
+    VOLUME_MIN_RATIO,
+    ENABLE_MULTI_TIMEFRAME_CONFIRMATION,
+    ENABLE_ADX_FILTER,
+    ADX_PERIOD,
+    ADX_MIN_VALUE,
+    ENABLE_MACD_HISTOGRAM_FILTER,
+    SIGNAL_EDGE_MIN,
 )
 from bist_bot.utils.logger import setup_logger
 
@@ -34,6 +43,67 @@ class RsiMacdStrategy(BaseStrategy):
                 dup_cols,
             )
 
+    @staticmethod
+    def _higher_timeframe_rule(interval: str | None) -> str | None:
+        if not interval:
+            return "1h"
+
+        mapping = {
+            "1m": "15min",
+            "2m": "15min",
+            "5m": "1h",
+            "15m": "1h",
+            "30m": "4h",
+            "60m": "1D",
+            "90m": "1D",
+            "1h": "1D",
+            "1d": "1W",
+            "5d": "1M",
+            "1wk": "1M",
+            "1mo": "3M",
+        }
+        return mapping.get(interval)
+
+    @staticmethod
+    def _volume_filter(df: pd.DataFrame) -> pd.Series:
+        if not ENABLE_VOLUME_FILTER:
+            return pd.Series(True, index=df.index, dtype=bool)
+        if "volume" not in df.columns:
+            return pd.Series(True, index=df.index, dtype=bool)
+
+        volume = pd.to_numeric(df["volume"], errors="coerce")
+        min_periods = max(2, min(VOLUME_SMA_PERIOD, 5))
+        volume_sma = volume.rolling(VOLUME_SMA_PERIOD, min_periods=min_periods).mean()
+        volume_ok = volume >= (volume_sma * VOLUME_MIN_RATIO)
+        return volume_ok.fillna(False).astype(bool)
+
+    def _multi_timeframe_filter(self, df: pd.DataFrame, interval: str | None) -> tuple[pd.Series, pd.Series]:
+        all_true = pd.Series(True, index=df.index, dtype=bool)
+        if not ENABLE_MULTI_TIMEFRAME_CONFIRMATION:
+            return all_true, all_true
+        if not isinstance(df.index, pd.DatetimeIndex):
+            return all_true, all_true
+
+        rule = self._higher_timeframe_rule(interval)
+        if not rule:
+            return all_true, all_true
+
+        close_series = pd.to_numeric(df["close"], errors="coerce")
+        higher_close = close_series.resample(rule).last().dropna()
+        if higher_close.empty:
+            return all_true, all_true
+
+        higher_df = pd.DataFrame({"close": higher_close})
+        higher_df["ema_fast"] = ta.ema(higher_df["close"], length=TREND_EMA_FAST_PERIOD)
+        higher_df["ema_slow"] = ta.ema(higher_df["close"], length=TREND_EMA_SLOW_PERIOD)
+
+        htf_up = (higher_df["ema_fast"] > higher_df["ema_slow"]).fillna(False)
+        htf_down = (higher_df["ema_fast"] < higher_df["ema_slow"]).fillna(False)
+
+        buy_ok = htf_up.reindex(df.index, method="ffill").fillna(False).astype(bool)
+        sell_ok = htf_down.reindex(df.index, method="ffill").fillna(False).astype(bool)
+        return buy_ok, sell_ok
+
     def _calculate_indicators(self, historical_data: pd.DataFrame) -> pd.DataFrame:
         """
         Calculates RSI, MACD, and SMA indicators.
@@ -49,6 +119,7 @@ class RsiMacdStrategy(BaseStrategy):
 
         # Ensure columns are in the correct format
         df = historical_data.copy()
+        df = df.sort_index()
         df.columns = [col.lower() for col in df.columns]
 
         # Calculate RSI
@@ -93,6 +164,14 @@ class RsiMacdStrategy(BaseStrategy):
 
         # ATR for volatility filter
         df["atr"] = ta.atr(df["high"], df["low"], df["close"], length=ATR_PERIOD)
+
+        # ADX trend strength
+        adx = ta.adx(df["high"], df["low"], df["close"], length=ADX_PERIOD)
+        adx_key = f"ADX_{ADX_PERIOD}"
+        if adx is None or adx.empty or adx_key not in adx.columns:
+            df["adx"] = float("nan")
+        else:
+            df["adx"] = adx[adx_key]
         
         return df
 
@@ -132,6 +211,8 @@ class RsiMacdStrategy(BaseStrategy):
         bbu = last_row["bbu"]
         bbl = last_row["bbl"]
         atr = last_row["atr"]
+        adx = last_row["adx"] if "adx" in last_row else float("nan")
+        macdh = last_row["macdh"] if "macdh" in last_row else float("nan")
 
         prev_macd = second_last_row["macd"]
         prev_macds = second_last_row["macds"]
@@ -150,6 +231,8 @@ class RsiMacdStrategy(BaseStrategy):
         self._log_non_scalar("bbu", bbu, df)
         self._log_non_scalar("bbl", bbl, df)
         self._log_non_scalar("atr", atr, df)
+        self._log_non_scalar("adx", adx, df)
+        self._log_non_scalar("macdh", macdh, df)
 
         has_macd = (
             pd.notna(macd)
@@ -199,13 +282,50 @@ class RsiMacdStrategy(BaseStrategy):
         if pd.isna(atr) or atr <= 0:
             return "HOLD"
 
-        if score_buy >= SIGNAL_SCORE_THRESHOLD and score_buy >= score_sell:
+        if ENABLE_ADX_FILTER:
+            if pd.isna(adx) or adx < ADX_MIN_VALUE:
+                return "HOLD"
+
+        volume_ok = self._volume_filter(df).iloc[-1]
+        if not volume_ok:
+            return "HOLD"
+
+        mtf_buy_ok, mtf_sell_ok = self._multi_timeframe_filter(df, DATA_INTERVAL)
+        buy_allowed = bool(mtf_buy_ok.iloc[-1])
+        sell_allowed = bool(mtf_sell_ok.iloc[-1])
+
+        if ENABLE_MACD_HISTOGRAM_FILTER:
+            hist_buy_ok = pd.notna(macdh) and macdh > 0
+            hist_sell_ok = pd.notna(macdh) and macdh < 0
+        else:
+            hist_buy_ok = True
+            hist_sell_ok = True
+
+        buy_edge = score_buy - score_sell
+        sell_edge = score_sell - score_buy
+
+        if (
+            score_buy >= SIGNAL_SCORE_THRESHOLD
+            and buy_edge >= SIGNAL_EDGE_MIN
+            and buy_allowed
+            and hist_buy_ok
+        ):
             return "BUY"
-        if score_sell >= SIGNAL_SCORE_THRESHOLD and score_sell > score_buy:
+        if (
+            score_sell >= SIGNAL_SCORE_THRESHOLD
+            and sell_edge >= SIGNAL_EDGE_MIN
+            and sell_allowed
+            and hist_sell_ok
+        ):
             return "SELL"
         return "HOLD"
 
-    def generate_signals_batch(self, historical_data: pd.DataFrame, symbol: str) -> pd.Series | None:
+    def generate_signals_batch(
+        self,
+        historical_data: pd.DataFrame,
+        symbol: str,
+        interval: str | None = None,
+    ) -> pd.Series | None:
         """
         Vectorized signal generation for backtests.
         Returns a Series of signals aligned to the historical_data index.
@@ -236,6 +356,8 @@ class RsiMacdStrategy(BaseStrategy):
         bbu = pd.to_numeric(df["bbu"], errors="coerce")
         bbl = pd.to_numeric(df["bbl"], errors="coerce")
         atr = df["atr"]
+        adx = pd.to_numeric(df["adx"], errors="coerce") if "adx" in df.columns else pd.Series(float("nan"), index=df.index)
+        macdh = pd.to_numeric(df["macdh"], errors="coerce") if "macdh" in df.columns else pd.Series(float("nan"), index=df.index)
 
         macd_buy = (macd > macds) & (macd.shift(1) <= macds.shift(1))
         macd_sell = (macd < macds) & (macd.shift(1) >= macds.shift(1))
@@ -263,9 +385,35 @@ class RsiMacdStrategy(BaseStrategy):
             + downtrend.astype(int)
         )
 
-        tradable = atr.notna() & (atr > 0)
+        volume_ok = self._volume_filter(df)
+        mtf_buy_ok, mtf_sell_ok = self._multi_timeframe_filter(df, interval or DATA_INTERVAL)
+        tradable = atr.notna() & (atr > 0) & volume_ok
+        if ENABLE_ADX_FILTER:
+            tradable = tradable & adx.notna() & (adx >= ADX_MIN_VALUE)
+
+        if ENABLE_MACD_HISTOGRAM_FILTER:
+            hist_buy_ok = (macdh > 0).fillna(False)
+            hist_sell_ok = (macdh < 0).fillna(False)
+        else:
+            hist_buy_ok = pd.Series(True, index=df.index, dtype=bool)
+            hist_sell_ok = pd.Series(True, index=df.index, dtype=bool)
+
+        buy_edge_ok = (buy_score - sell_score) >= SIGNAL_EDGE_MIN
+        sell_edge_ok = (sell_score - buy_score) >= SIGNAL_EDGE_MIN
 
         signals = pd.Series("HOLD", index=df.index)
-        signals.loc[tradable & (buy_score >= SIGNAL_SCORE_THRESHOLD) & (buy_score >= sell_score)] = "BUY"
-        signals.loc[tradable & (sell_score >= SIGNAL_SCORE_THRESHOLD) & (sell_score > buy_score)] = "SELL"
+        signals.loc[
+            tradable
+            & mtf_buy_ok
+            & hist_buy_ok
+            & buy_edge_ok
+            & (buy_score >= SIGNAL_SCORE_THRESHOLD)
+        ] = "BUY"
+        signals.loc[
+            tradable
+            & mtf_sell_ok
+            & hist_sell_ok
+            & sell_edge_ok
+            & (sell_score >= SIGNAL_SCORE_THRESHOLD)
+        ] = "SELL"
         return signals

@@ -24,7 +24,12 @@ class BaseStrategy(IStrategy):
         """
         pass
 
-    def generate_signals_batch(self, historical_data: pd.DataFrame, symbol: str) -> pd.Series | None:
+    def generate_signals_batch(
+        self,
+        historical_data: pd.DataFrame,
+        symbol: str,
+        interval: str | None = None,
+    ) -> pd.Series | None:
         """
         Optional batch signal generation for backtests.
         Return a Series of signals aligned to historical_data index, or None to fall back to per-row logic.

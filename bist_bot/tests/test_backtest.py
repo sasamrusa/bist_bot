@@ -15,7 +15,7 @@ class DummyStrategy(IStrategy):
     def generate_signal(self, historical_data: pd.DataFrame, current_data: pd.Series, symbol: str) -> str:
         return "HOLD"
 
-    def generate_signals_batch(self, historical_data: pd.DataFrame, symbol: str):
+    def generate_signals_batch(self, historical_data: pd.DataFrame, symbol: str, interval: str | None = None):
         return None
 
 
@@ -33,4 +33,9 @@ def test_empty_data_backtest_returns_full_result():
     assert result.sell_markers == []
     assert result.equity_curve == []
     assert result.price_series == []
+    assert result.ohlc_series == []
+    assert result.total_fees == 0.0
+    assert result.total_slippage_cost == 0.0
+    assert result.closed_trades == []
+    assert result.open_trade is None
     assert result.has_strategy_trades is False
