@@ -1,0 +1,1 @@
+set PYTHONPATH=c:\Users\ASUS\Desktop && py -3.13 -m bist_bot.gui_app

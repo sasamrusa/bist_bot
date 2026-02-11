@@ -1,0 +1,5 @@
+{
+  "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260211_163852.joblib",
+  "created_at": "2026-02-11T16:38:52.937684",
+  "model_backend": "sklearn_hgb"
+}

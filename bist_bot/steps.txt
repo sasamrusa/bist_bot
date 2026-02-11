@@ -1,0 +1,74 @@
+**Yapman gereken net adımlar (sırasıyla)**
+
+1. **Ortamı hazırla**
+- Komutları `C:\Users\ASUS\Desktop` dizininde çalıştır.
+- Bağımlılıkları kur:
+```bash
+py -3.13 -m pip install -r bist_bot/requirements.txt
+```
+- İstersen daha iyi model backend’i için:
+```bash
+py -3.13 -m pip install lightgbm catboost
+```
+
+2. **Önce smoke test (hızlı doğrulama) çalıştır**
+- Eğitim:
+```bash
+py -3.13 -m bist_bot.ai_pipeline.train --years 2 --interval 1d --horizon-bars 5 --min-abs-move 0.008 --min-rows-per-symbol 120 --train-years 1 --test-months 3 --step-months 3 --gap-days 2 --buy-threshold 0.57 --sell-threshold 0.43 --max-symbols 8 --calibrate --model-dir bist_bot/models/ai_registry --report-path bist_bot/reports/ai_training_latest_smoke.json
+```
+- Çıktı dosyalarını kontrol et:
+  - `bist_bot/models/ai_registry`
+  - `bist_bot/reports/ai_training_latest_smoke.json`
+
+3. **Raporu doğru oku**
+- `avg_fold_auc`: modelin yön tahmini kalitesi (0.5 civarı zayıf, üstü iyileşir).
+- `avg_fold_policy_return_pct`: işlem kuralı sonrası net ortalama getiri.
+- Fold bazında bak: tek fold iyi, diğerleri kötü ise overfit riski vardır.
+
+4. **Inference ile günlük sinyal üret**
+```bash
+py -3.13 -m bist_bot.ai_pipeline.infer --model-dir bist_bot/models/ai_registry --interval 1d --output bist_bot/reports/ai_inference_latest.json
+```
+- Sonuçları `bist_bot/reports/ai_inference_latest.json` içinde kontrol et.
+- `signal=HOLD` çok fazlaysa eşikler çok sıkı olabilir.
+
+5. **Canlıya geçmeden önce 1 döngü paper test yap**
+```bash
+py -3.13 -m bist_bot.main_ai --max-cycles 1 --lookback-days 180
+```
+- Loglarda `prob`, `signal`, `price` ve emir davranışını gör.
+- Sorun yoksa sınırsız çalıştır:
+```bash
+py -3.13 -m bist_bot.main_ai
+```
+
+6. **Sinyal sayısını artırmak/azaltmak için ayarla**
+- `ai_pipeline/signal_policy.py`:
+  - `buy_threshold`, `sell_threshold`
+  - Örn: daha fazla trade için `0.55 / 0.45`
+- `ai_pipeline/risk_engine.py`:
+  - `risk_per_trade_pct`, `max_position_pct`, `atr_stop_multiplier`
+
+7. **Model kalitesini artırmak için ayarla**
+- `ai_pipeline/train.py`:
+  - `--horizon-bars` (örn 3, 5, 10)
+  - `--min-abs-move` (örn 0.006, 0.01, 0.015)
+  - `--train-years`, `--test-months`, `--step-months`, `--gap-days`
+- `ai_pipeline/feature_store.py`:
+  - yeni feature’lar ekle (rejim, endeks relatif güç, vb.)
+
+8. **Her değişiklikten sonra zorunlu kontrol döngüsü**
+1. Train  
+2. Report kontrol  
+3. Infer  
+4. `main_ai --max-cycles 1`  
+5. Başarılıysa uzun çalıştır  
+
+---
+
+**Şu anki pratik önerim**
+1. İlk olarak eşikleri `0.55/0.45` yapıp tekrar train+infer al.  
+2. Sonra `lightgbm` kurup aynı deneyi bir daha çalıştır.  
+3. En iyi raporu baz alıp paper botu 1-2 gün izleyerek karar ver.  
+
+İstersen bir sonraki adımda eşik/horizon için otomatik grid-search komutu da ekleyebilirim.
