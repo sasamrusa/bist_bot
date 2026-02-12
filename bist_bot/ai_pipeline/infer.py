@@ -102,7 +102,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run AI model inference for BIST symbols")
     parser.add_argument("--model-dir", type=str, default="models/ai_registry", help="Model registry directory")
     parser.add_argument("--model-path", type=str, default="", help="Specific model bundle path (optional)")
-    parser.add_argument("--interval", type=str, default="1d", help="Market data interval")
+    parser.add_argument("--interval", type=str, default="1h", help="Market data interval")
     parser.add_argument("--lookback-days", type=int, default=420, help="Historical lookback window for features")
     parser.add_argument("--equity", type=float, default=100_000.0, help="Portfolio equity for suggested quantity")
     parser.add_argument("--buy-threshold", type=float, default=0.58, help="BUY probability threshold")

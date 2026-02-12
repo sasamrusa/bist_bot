@@ -1,0 +1,259 @@
+{
+  "generated_at": "2026-02-12T10:04:37.343769",
+  "interval": "1d",
+  "count": 28,
+  "decisions": [
+    {
+      "symbol": "HALKB.IS",
+      "probability_up": 0.543473724607053,
+      "signal": "HOLD",
+      "price": 46.0,
+      "atr": 1.8371275372285238,
+      "suggested_qty": 0.0,
+      "drift_score": 0.49538075643546553
+    },
+    {
+      "symbol": "TKFEN.IS",
+      "probability_up": 0.543442751400827,
+      "signal": "HOLD",
+      "price": 83.25,
+      "atr": 4.450998338462887,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3618012128454699
+    },
+    {
+      "symbol": "KCHOL.IS",
+      "probability_up": 0.5434138523050711,
+      "signal": "HOLD",
+      "price": 207.39999389648438,
+      "atr": 5.4847169645781255,
+      "suggested_qty": 0.0,
+      "drift_score": 0.35039077443678834
+    },
+    {
+      "symbol": "ARCLK.IS",
+      "probability_up": 0.5421121054909984,
+      "signal": "HOLD",
+      "price": 122.69999694824219,
+      "atr": 3.5767590412343813,
+      "suggested_qty": 0.0,
+      "drift_score": 0.35949991349296095
+    },
+    {
+      "symbol": "PETKM.IS",
+      "probability_up": 0.5418454766550033,
+      "signal": "HOLD",
+      "price": 18.75,
+      "atr": 0.48774412107914084,
+      "suggested_qty": 0.0,
+      "drift_score": 0.24767208127530718
+    },
+    {
+      "symbol": "SISE.IS",
+      "probability_up": 0.5411313986108363,
+      "signal": "HOLD",
+      "price": 47.68000030517578,
+      "atr": 1.5919176597336309,
+      "suggested_qty": 0.0,
+      "drift_score": 0.2502975429099222
+    },
+    {
+      "symbol": "VESTL.IS",
+      "probability_up": 0.5410221782243804,
+      "signal": "HOLD",
+      "price": 31.639999389648438,
+      "atr": 0.9232558595908148,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3354377705869176
+    },
+    {
+      "symbol": "TTKOM.IS",
+      "probability_up": 0.5409588241371961,
+      "signal": "HOLD",
+      "price": 68.1500015258789,
+      "atr": 1.8689157426831757,
+      "suggested_qty": 0.0,
+      "drift_score": 0.32127982741035044
+    },
+    {
+      "symbol": "VAKBN.IS",
+      "probability_up": 0.5408548038243901,
+      "signal": "HOLD",
+      "price": 37.380001068115234,
+      "atr": 1.3081544272381724,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3599070616918314
+    },
+    {
+      "symbol": "ZOREN.IS",
+      "probability_up": 0.5407646671641927,
+      "signal": "HOLD",
+      "price": 3.4700000286102295,
+      "atr": 0.10116239244224079,
+      "suggested_qty": 0.0,
+      "drift_score": 0.297701871736473
+    },
+    {
+      "symbol": "DOHOL.IS",
+      "probability_up": 0.5407176498686249,
+      "signal": "HOLD",
+      "price": 21.299999237060547,
+      "atr": 0.5739500180612512,
+      "suggested_qty": 0.0,
+      "drift_score": 0.2578038993719843
+    },
+    {
+      "symbol": "TAVHL.IS",
+      "probability_up": 0.5404542949566723,
+      "signal": "HOLD",
+      "price": 355.0,
+      "atr": 10.762349517807165,
+      "suggested_qty": 0.0,
+      "drift_score": 0.7465345500754291
+    },
+    {
+      "symbol": "FROTO.IS",
+      "probability_up": 0.5401675576295212,
+      "signal": "HOLD",
+      "price": 120.19999694824219,
+      "atr": 3.5047408157959996,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3544966344884711
+    },
+    {
+      "symbol": "BIMAS.IS",
+      "probability_up": 0.5401083727954067,
+      "signal": "HOLD",
+      "price": 698.0,
+      "atr": 21.43058909923711,
+      "suggested_qty": 0.0,
+      "drift_score": 0.6216019652991169
+    },
+    {
+      "symbol": "AKBNK.IS",
+      "probability_up": 0.5399750338683104,
+      "signal": "HOLD",
+      "price": 83.94999694824219,
+      "atr": 2.8501270735559157,
+      "suggested_qty": 0.0,
+      "drift_score": 0.43896831753568616
+    },
+    {
+      "symbol": "PGSUS.IS",
+      "probability_up": 0.5396044068914956,
+      "signal": "HOLD",
+      "price": 207.0,
+      "atr": 4.836778567842822,
+      "suggested_qty": 0.0,
+      "drift_score": 0.4515095238577526
+    },
+    {
+      "symbol": "GOLTS.IS",
+      "probability_up": 0.5390438968340243,
+      "signal": "HOLD",
+      "price": 365.75,
+      "atr": 8.295190048754888,
+      "suggested_qty": 0.0,
+      "drift_score": 0.3398658764588886
+    },
+    {
+      "symbol": "SAHOL.IS",
+      "probability_up": 0.5389626187793627,
+      "signal": "HOLD",
+      "price": 103.9000015258789,
+      "atr": 3.1742216729256554,
+      "suggested_qty": 0.0,
+      "drift_score": 0.253567912177497
+    },
+    {
+      "symbol": "TUPRS.IS",
+      "probability_up": 0.538793760597788,
+      "signal": "HOLD",
+      "price": 215.89999389648438,
+      "atr": 7.332867133870238,
+      "suggested_qty": 0.0,
+      "drift_score": 0.394249642785332
+    },
+    {
+      "symbol": "GARAN.IS",
+      "probability_up": 0.5387370986368049,
+      "signal": "HOLD",
+      "price": 154.5,
+      "atr": 5.446455476360912,
+      "suggested_qty": 0.0,
+      "drift_score": 0.2604735029722504
+    },
+    {
+      "symbol": "SASA.IS",
+      "probability_up": 0.5379890194089931,
+      "signal": "HOLD",
+      "price": 2.5399999618530273,
+      "atr": 0.10364353715217281,
+      "suggested_qty": 0.0,
+      "drift_score": 0.36475072017150284
+    },
+    {
+      "symbol": "ASELS.IS",
+      "probability_up": 0.5378895631091966,
+      "signal": "HOLD",
+      "price": 294.0,
+      "atr": 12.809551849162256,
+      "suggested_qty": 0.0,
+      "drift_score": 0.658791394481232
+    },
+    {
+      "symbol": "ISCTR.IS",
+      "probability_up": 0.5376780642020696,
+      "signal": "HOLD",
+      "price": 17.1299991607666,
+      "atr": 0.572051041994121,
+      "suggested_qty": 0.0,
+      "drift_score": 0.23555547129042678
+    },
+    {
+      "symbol": "TCELL.IS",
+      "probability_up": 0.5369513165576096,
+      "signal": "HOLD",
+      "price": 122.0999984741211,
+      "atr": 3.3939217260096477,
+      "suggested_qty": 0.0,
+      "drift_score": 0.24774768391136384
+    },
+    {
+      "symbol": "YKBNK.IS",
+      "probability_up": 0.5369390287076421,
+      "signal": "HOLD",
+      "price": 39.779998779296875,
+      "atr": 1.331863677856628,
+      "suggested_qty": 0.0,
+      "drift_score": 0.23436457361057256
+    },
+    {
+      "symbol": "KRDMD.IS",
+      "probability_up": 0.5366029691849762,
+      "signal": "HOLD",
+      "price": 31.079999923706055,
+      "atr": 0.9528463303681761,
+      "suggested_qty": 0.0,
+      "drift_score": 0.09477879600938675
+    },
+    {
+      "symbol": "EREGL.IS",
+      "probability_up": 0.5365865173544756,
+      "signal": "HOLD",
+      "price": 29.239999771118164,
+      "atr": 0.7840963107967538,
+      "suggested_qty": 0.0,
+      "drift_score": 0.2866339803890975
+    },
+    {
+      "symbol": "THYAO.IS",
+      "probability_up": 0.535920915935638,
+      "signal": "HOLD",
+      "price": 331.0,
+      "atr": 7.931084696489431,
+      "suggested_qty": 0.0,
+      "drift_score": 0.4569847779606196
+    }
+  ]
+}

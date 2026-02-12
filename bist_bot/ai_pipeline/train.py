@@ -16,40 +16,51 @@ from bist_bot.ai_pipeline.dataset_builder import build_training_dataset
 from bist_bot.ai_pipeline.drift_monitor import build_feature_stats
 from bist_bot.ai_pipeline.registry import save_model_bundle
 from bist_bot.ai_pipeline.signal_policy import PolicyConfig, evaluate_probability_policy
+from bist_bot.ai_pipeline.universe import resolve_universe
 from bist_bot.core.config import TICKERS
 from bist_bot.data.yf_provider import YFDataProvider
 
 
-def _select_model(random_state: int) -> Tuple[object, str]:
-    try:
-        from lightgbm import LGBMClassifier  # type: ignore
+def _select_model(random_state: int, backend: str) -> Tuple[object, str]:
+    requested = backend.lower().strip()
+    backends = ["lightgbm", "catboost", "sklearn_hgb"] if requested == "auto" else [requested]
 
-        model = LGBMClassifier(
-            n_estimators=350,
-            learning_rate=0.04,
-            num_leaves=31,
-            subsample=0.85,
-            colsample_bytree=0.85,
-            random_state=random_state,
-        )
-        return model, "lightgbm"
-    except Exception:
-        pass
+    if "lightgbm" in backends:
+        try:
+            from lightgbm import LGBMClassifier  # type: ignore
 
-    try:
-        from catboost import CatBoostClassifier  # type: ignore
+            model = LGBMClassifier(
+                n_estimators=350,
+                learning_rate=0.04,
+                num_leaves=31,
+                subsample=0.85,
+                colsample_bytree=0.85,
+                random_state=random_state,
+            )
+            return model, "lightgbm"
+        except Exception:
+            if requested == "lightgbm":
+                raise
 
-        model = CatBoostClassifier(
-            iterations=450,
-            depth=6,
-            learning_rate=0.04,
-            loss_function="Logloss",
-            verbose=False,
-            random_seed=random_state,
-        )
-        return model, "catboost"
-    except Exception:
-        pass
+    if "catboost" in backends:
+        try:
+            from catboost import CatBoostClassifier  # type: ignore
+
+            model = CatBoostClassifier(
+                iterations=450,
+                depth=6,
+                learning_rate=0.04,
+                loss_function="Logloss",
+                verbose=False,
+                random_seed=random_state,
+            )
+            return model, "catboost"
+        except Exception:
+            if requested == "catboost":
+                raise
+
+    if requested not in {"auto", "sklearn_hgb"} and requested not in {"lightgbm", "catboost"}:
+        raise ValueError(f"Unsupported model backend: {backend}")
 
     model = HistGradientBoostingClassifier(
         max_iter=400,
@@ -95,8 +106,10 @@ def _walk_forward_windows(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train AI-based BIST trading model")
-    parser.add_argument("--years", type=int, default=10, help="History years to download")
-    parser.add_argument("--interval", type=str, default="1d", help="Bar interval")
+    parser.add_argument("--years", type=int, default=2, help="History years to download")
+    parser.add_argument("--interval", type=str, default="1h", help="Bar interval")
+    parser.add_argument("--universe", type=str, default="config", help="Symbol universe: config | bist100")
+    parser.add_argument("--model-backend", type=str, default="auto", help="auto | lightgbm | catboost | sklearn_hgb")
     parser.add_argument("--horizon-bars", type=int, default=5, help="Label horizon in bars")
     parser.add_argument("--min-abs-move", type=float, default=0.01, help="Meta-label absolute move threshold")
     parser.add_argument("--min-rows-per-symbol", type=int, default=500, help="Minimum rows per symbol")
@@ -117,10 +130,22 @@ def main() -> None:
         raise ValueError("buy-threshold must be greater than sell-threshold")
 
     end = datetime.now()
-    start = end - timedelta(days=(args.years * 365) + 20)
-    symbols = list(TICKERS)
+    if args.interval == "1h":
+        # Yahoo intraday window is ~730 days; keep safe headroom.
+        intraday_days = min(args.years * 365, 700)
+        start = end - timedelta(days=intraday_days)
+    else:
+        start = end - timedelta(days=(args.years * 365) + 20)
+    if args.interval == "1h" and args.years > 2:
+        print("warning: 1h data on Yahoo has ~730 day limit, clamping years to 2")
+        args.years = 2
+
+    symbols = resolve_universe(args.universe)
+    if args.universe == "config":
+        symbols = list(TICKERS)
     if args.max_symbols > 0:
         symbols = symbols[: args.max_symbols]
+    print(f"universe={args.universe} symbol_count={len(symbols)} interval={args.interval}")
 
     provider = YFDataProvider()
     dataset_result = build_training_dataset(
@@ -167,7 +192,7 @@ def main() -> None:
         x_test = test_df[feature_columns].to_numpy(dtype=float)
         y_test = test_df["y_dir"].to_numpy(dtype=int)
 
-        model, backend = _select_model(args.seed + fold_id)
+        model, backend = _select_model(args.seed + fold_id, args.model_backend)
         fitted_model: object
         if args.calibrate:
             calibrated = CalibratedClassifierCV(estimator=model, cv=3, method="sigmoid")
@@ -212,7 +237,7 @@ def main() -> None:
     # Final training on all data for deployment.
     x_all = dataset[feature_columns].to_numpy(dtype=float)
     y_all = dataset["y_dir"].to_numpy(dtype=int)
-    final_model, final_backend = _select_model(args.seed)
+    final_model, final_backend = _select_model(args.seed, args.model_backend)
     if args.calibrate:
         final_fitted = CalibratedClassifierCV(estimator=final_model, cv=3, method="sigmoid")
         final_fitted.fit(x_all, y_all)
@@ -232,6 +257,8 @@ def main() -> None:
         "symbols_used": sorted(dataset["symbol"].unique().tolist()),
         "config": {
             "interval": args.interval,
+            "universe": args.universe,
+            "model_backend_requested": args.model_backend,
             "years": args.years,
             "horizon_bars": args.horizon_bars,
             "min_abs_move": args.min_abs_move,
@@ -279,4 +306,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

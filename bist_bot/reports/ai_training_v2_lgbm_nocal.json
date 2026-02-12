@@ -1,0 +1,220 @@
+{
+  "summary": {
+    "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260212_101040.joblib",
+    "model_backend": "lightgbm",
+    "rows": 70397,
+    "symbols": 28,
+    "folds": 8,
+    "avg_fold_auc": 0.5314725711290802,
+    "avg_fold_policy_return_pct": 55.549731484007616
+  },
+  "folds": [
+    {
+      "fold_id": 1,
+      "train_start": "2016-03-11",
+      "train_end": "2021-03-10",
+      "test_start": "2021-03-16",
+      "test_end": "2022-03-15",
+      "train_rows": 36176,
+      "test_rows": 7000,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5548571428571428,
+        "f1": 0.6396854764107308,
+        "auc": 0.551051733081789
+      },
+      "policy": {
+        "avg_symbol_return_pct": 30.291882495758642,
+        "median_symbol_return_pct": 23.59271263245154,
+        "trades": 307,
+        "win_rate": 59.28338762214984,
+        "avg_trade_return_pct": 2.555744188292685
+      }
+    },
+    {
+      "fold_id": 2,
+      "train_start": "2016-09-11",
+      "train_end": "2021-09-10",
+      "test_start": "2021-09-16",
+      "test_end": "2022-09-15",
+      "train_rows": 35924,
+      "test_rows": 7056,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5681689342403629,
+        "f1": 0.6542607511630546,
+        "auc": 0.5491089192512495
+      },
+      "policy": {
+        "avg_symbol_return_pct": 96.27900168902175,
+        "median_symbol_return_pct": 84.18171182925678,
+        "trades": 346,
+        "win_rate": 67.91907514450867,
+        "avg_trade_return_pct": 6.016545998202796
+      }
+    },
+    {
+      "fold_id": 3,
+      "train_start": "2017-03-11",
+      "train_end": "2022-03-10",
+      "test_start": "2022-03-16",
+      "test_end": "2023-03-15",
+      "train_rows": 35868,
+      "test_rows": 6972,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5494836488812392,
+        "f1": 0.633788037775446,
+        "auc": 0.5329832571866095
+      },
+      "policy": {
+        "avg_symbol_return_pct": 86.39751177621532,
+        "median_symbol_return_pct": 73.57337368440321,
+        "trades": 307,
+        "win_rate": 67.42671009771986,
+        "avg_trade_return_pct": 6.491129475993854
+      }
+    },
+    {
+      "fold_id": 4,
+      "train_start": "2017-09-11",
+      "train_end": "2022-09-10",
+      "test_start": "2022-09-16",
+      "test_end": "2023-09-15",
+      "train_rows": 35672,
+      "test_rows": 7000,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5655714285714286,
+        "f1": 0.66267332224071,
+        "auc": 0.5368205028715307
+      },
+      "policy": {
+        "avg_symbol_return_pct": 69.29579961082976,
+        "median_symbol_return_pct": 78.1626648974125,
+        "trades": 326,
+        "win_rate": 67.79141104294479,
+        "avg_trade_return_pct": 5.0787442665765505
+      }
+    },
+    {
+      "fold_id": 5,
+      "train_start": "2018-03-11",
+      "train_end": "2023-03-10",
+      "test_start": "2023-03-16",
+      "test_end": "2024-03-15",
+      "train_rows": 35560,
+      "test_rows": 7112,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5694600674915635,
+        "f1": 0.6983845547675335,
+        "auc": 0.5546725621414914
+      },
+      "policy": {
+        "avg_symbol_return_pct": 71.32203937665203,
+        "median_symbol_return_pct": 60.70320870118694,
+        "trades": 188,
+        "win_rate": 65.95744680851064,
+        "avg_trade_return_pct": 9.248342901465712
+      }
+    },
+    {
+      "fold_id": 6,
+      "train_start": "2018-09-11",
+      "train_end": "2023-09-10",
+      "test_start": "2023-09-16",
+      "test_end": "2024-09-15",
+      "train_rows": 35336,
+      "test_rows": 6949,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5567707583825011,
+        "f1": 0.6715017064846417,
+        "auc": 0.5421644577110422
+      },
+      "policy": {
+        "avg_symbol_return_pct": 45.37457202975375,
+        "median_symbol_return_pct": 41.84949055139553,
+        "trades": 241,
+        "win_rate": 56.84647302904564,
+        "avg_trade_return_pct": 4.697211221651599
+      }
+    },
+    {
+      "fold_id": 7,
+      "train_start": "2019-03-11",
+      "train_end": "2024-03-10",
+      "test_start": "2024-03-16",
+      "test_end": "2025-03-15",
+      "train_rows": 35336,
+      "test_rows": 6921,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5240572171651495,
+        "f1": 0.6343250444049734,
+        "auc": 0.5036179569018788
+      },
+      "policy": {
+        "avg_symbol_return_pct": 32.732430673702304,
+        "median_symbol_return_pct": 25.122157018827817,
+        "trades": 258,
+        "win_rate": 51.162790697674424,
+        "avg_trade_return_pct": 3.1712455640512602
+      }
+    },
+    {
+      "fold_id": 8,
+      "train_start": "2019-09-11",
+      "train_end": "2024-09-10",
+      "test_start": "2024-09-16",
+      "test_end": "2025-09-15",
+      "train_rows": 35033,
+      "test_rows": 7028,
+      "model_backend": "lightgbm",
+      "classification": {
+        "accuracy": 0.5088218554354013,
+        "f1": 0.6177187153931339,
+        "auc": 0.48136117988705074
+      },
+      "policy": {
+        "avg_symbol_return_pct": 12.704614220127402,
+        "median_symbol_return_pct": 9.299257855889643,
+        "trades": 239,
+        "win_rate": 47.28033472803347,
+        "avg_trade_return_pct": 1.4356674483934273
+      }
+    }
+  ],
+  "skipped_symbols": [],
+  "symbol_to_id": {
+    "AKBNK.IS": 0,
+    "ARCLK.IS": 1,
+    "ASELS.IS": 2,
+    "BIMAS.IS": 3,
+    "DOHOL.IS": 4,
+    "EREGL.IS": 5,
+    "FROTO.IS": 6,
+    "GARAN.IS": 7,
+    "GOLTS.IS": 8,
+    "HALKB.IS": 9,
+    "ISCTR.IS": 10,
+    "KCHOL.IS": 11,
+    "KRDMD.IS": 12,
+    "PETKM.IS": 13,
+    "PGSUS.IS": 14,
+    "SAHOL.IS": 15,
+    "SASA.IS": 16,
+    "SISE.IS": 17,
+    "TAVHL.IS": 18,
+    "TCELL.IS": 19,
+    "THYAO.IS": 20,
+    "TKFEN.IS": 21,
+    "TTKOM.IS": 22,
+    "TUPRS.IS": 23,
+    "VAKBN.IS": 24,
+    "VESTL.IS": 25,
+    "YKBNK.IS": 26,
+    "ZOREN.IS": 27
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260212_104806.joblib",
+    "model_backend": "catboost",
+    "rows": 79898,
+    "symbols": 20,
+    "folds": 4,
+    "avg_fold_auc": 0.5147945608794018,
+    "avg_fold_policy_return_pct": -1.5754946170702653
+  },
+  "folds": [
+    {
+      "fold_id": 1,
+      "train_start": "2024-03-20",
+      "train_end": "2025-03-19",
+      "test_start": "2025-03-21",
+      "test_end": "2025-06-20",
+      "train_rows": 39838,
+      "test_rows": 10220,
+      "model_backend": "catboost",
+      "classification": {
+        "accuracy": 0.5198630136986301,
+        "f1": 0.46599194689302426,
+        "auc": 0.5207187177837049
+      },
+      "policy": {
+        "avg_symbol_return_pct": -3.1286122860599135,
+        "median_symbol_return_pct": -4.019085169172632,
+        "trades": 316,
+        "win_rate": 43.037974683544306,
+        "avg_trade_return_pct": -0.2005194939272888
+      }
+    },
+    {
+      "fold_id": 2,
+      "train_start": "2024-05-20",
+      "train_end": "2025-05-19",
+      "test_start": "2025-05-21",
+      "test_end": "2025-08-20",
+      "train_rows": 40812,
+      "test_rows": 11060,
+      "model_backend": "catboost",
+      "classification": {
+        "accuracy": 0.5142857142857142,
+        "f1": 0.37809678166242183,
+        "auc": 0.5266932604720753
+      },
+      "policy": {
+        "avg_symbol_return_pct": -1.0986266675332657,
+        "median_symbol_return_pct": -1.508702641006543,
+        "trades": 237,
+        "win_rate": 42.616033755274266,
+        "avg_trade_return_pct": -0.0909450969409613
+      }
+    },
+    {
+      "fold_id": 3,
+      "train_start": "2024-07-20",
+      "train_end": "2025-07-19",
+      "test_start": "2025-07-21",
+      "test_end": "2025-10-20",
+      "train_rows": 41182,
+      "test_rows": 11700,
+      "model_backend": "catboost",
+      "classification": {
+        "accuracy": 0.5407692307692308,
+        "f1": 0.36541868430376756,
+        "auc": 0.5223466463624641
+      },
+      "policy": {
+        "avg_symbol_return_pct": -1.299202725994002,
+        "median_symbol_return_pct": -6.34754367655535,
+        "trades": 256,
+        "win_rate": 42.578125,
+        "avg_trade_return_pct": -0.12723845478730414
+      }
+    },
+    {
+      "fold_id": 4,
+      "train_start": "2024-09-20",
+      "train_end": "2025-09-19",
+      "test_start": "2025-09-21",
+      "test_end": "2025-12-20",
+      "train_rows": 41749,
+      "test_rows": 11280,
+      "model_backend": "catboost",
+      "classification": {
+        "accuracy": 0.5175531914893617,
+        "f1": 0.3603667136812412,
+        "auc": 0.4894196188993629
+      },
+      "policy": {
+        "avg_symbol_return_pct": -0.7755367886938797,
+        "median_symbol_return_pct": -3.7054876139621493,
+        "trades": 248,
+        "win_rate": 42.33870967741936,
+        "avg_trade_return_pct": -0.08076211980670898
+      }
+    }
+  ],
+  "skipped_symbols": [],
+  "symbol_to_id": {
+    "AEFES.IS": 0,
+    "AGHOL.IS": 1,
+    "AKBNK.IS": 2,
+    "AKSA.IS": 3,
+    "AKSEN.IS": 4,
+    "ALARK.IS": 5,
+    "ALTNY.IS": 6,
+    "ANSGR.IS": 7,
+    "ARCLK.IS": 8,
+    "ASELS.IS": 9,
+    "ASTOR.IS": 10,
+    "BALSU.IS": 11,
+    "BIMAS.IS": 12,
+    "BRSAN.IS": 13,
+    "BRYAT.IS": 14,
+    "BSOKE.IS": 15,
+    "BTCIM.IS": 16,
+    "CANTE.IS": 17,
+    "CCOLA.IS": 18,
+    "CIMSA.IS": 19
+  }
+}

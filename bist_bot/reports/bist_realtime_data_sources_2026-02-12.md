@@ -52,6 +52,40 @@ Practical meaning:
 - `Clock/TradingHours`: use exchange session calendar + heartbeat watchdog
 - `OrderGate`: block order generation if primary feed stale (e.g., >2-3 seconds)
 
+## Shortlist (LSEG vs Finnet vs Matriks)
+
+| Vendor | BIST licensed distributor list | Public integration signal | Real-time suitability | Estimated onboarding speed | Notes |
+| --- | --- | --- | --- | --- | --- |
+| LSEG / Refinitiv | Yes (Refinitiv Limited) | WebSocket/RTSDK docs and RTO/RDP streaming stack | High (enterprise-grade) | Slow-Medium | Strong global infra, but generally enterprise process and cost model |
+| Finnet | Yes (Finnet Elektronik...) | API & Finansal Veri Çözümleri page, Analiz Expert API modules | Medium-High (depends on package/license) | Fast-Medium | BIST-focused local provider, practical for Turkish market workflows |
+| Matriks | Yes (Matriks Finansal Teknolojiler A.Ş.) | FAQ explicitly states XML web service + MQTT/socket + REST; test/quote process | Medium-High (depends on live entitlement) | Fast-Medium | Local support, practical pilots; redistribution constraints apply |
+
+### Recommended starting point for this repo
+
+1. Start with **Matriks or Finnet** for fastest integration and Turkish-language support.
+2. Keep **LSEG/Refinitiv** as enterprise-upgrade path if you later need global cross-asset scale and stricter SLA.
+3. Before coding, validate licensing terms in writing for:
+- live vs delayed entitlement
+- non-display (algo/bot) usage
+- redistribution prohibition
+- session/device/user limits
+
+### Practical onboarding checklist (provider-agnostic)
+
+1. Request quote with exact scope:
+- BIST equities only
+- level (L1/L1+/L2)
+- real-time requirement
+- API protocol preference (WebSocket or MQTT/socket)
+2. Request trial/sandbox + docs + sample code.
+3. Implement feed adapter with:
+- auth/token refresh
+- reconnect and heartbeat
+- snapshot + incremental merge
+- stale-data guard (stop trading if feed stale)
+4. Run paper-trade burn-in for at least 2-4 weeks.
+5. Enable live trading only after feed-latency and gap-recovery acceptance tests.
+
 ## Sources
 - Borsa Istanbul Data Dissemination: https://www.borsaistanbul.com/en/data/data-dissemination
 - Borsa Istanbul Technical Side FAQ: https://www.borsaistanbul.com/en/faq/technical-side-data-dissemination

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 from bist_bot.ai_pipeline.feature_store import build_feature_frame
-from bist_bot.ai_pipeline.registry import load_latest_model_bundle
+from bist_bot.ai_pipeline.registry import load_latest_model_bundle, load_model_bundle
 from bist_bot.ai_pipeline.risk_engine import RiskConfig, calculate_order_quantity
 from bist_bot.ai_pipeline.signal_policy import PolicyConfig, probability_to_signal
 from bist_bot.core.config import DATA_INTERVAL, DATA_POLLING_INTERVAL_SECONDS, ORDER_TYPE, TICKERS
@@ -13,19 +13,40 @@ from bist_bot.execution.paper_broker import PaperBroker
 from bist_bot.utils.logger import setup_logger
 
 
-def run_ai_bot(model_dir: str = "models/ai_registry", lookback_days: int = 420, max_cycles: int = 0) -> None:
+def run_ai_bot(
+    model_dir: str = "models/ai_registry",
+    model_path: str = "",
+    lookback_days: int = 420,
+    max_cycles: int = 0,
+    buy_threshold: float = 0.58,
+    sell_threshold: float = 0.42,
+) -> None:
+    if buy_threshold <= sell_threshold:
+        raise ValueError("buy-threshold must be greater than sell-threshold")
+
     logger = setup_logger("bist_bot.main_ai")
-    bundle = load_latest_model_bundle(Path(model_dir))
+    if model_path:
+        bundle = load_model_bundle(Path(model_path))
+    else:
+        bundle = load_latest_model_bundle(Path(model_dir))
     model = bundle["model"]
     feature_columns = list(bundle["feature_columns"])
     symbol_to_id = dict(bundle.get("symbol_to_id", {}))
+    model_backend = str(bundle.get("model_backend", "unknown"))
 
     provider = YFDataProvider()
     broker = PaperBroker()
-    policy = PolicyConfig()
+    policy = PolicyConfig(buy_threshold=buy_threshold, sell_threshold=sell_threshold)
     risk = RiskConfig()
 
-    logger.info("starting_ai_bot symbols=%s interval=%s", len(TICKERS), DATA_INTERVAL)
+    logger.info(
+        "starting_ai_bot symbols=%s interval=%s model_backend=%s buy_th=%.3f sell_th=%.3f",
+        len(TICKERS),
+        DATA_INTERVAL,
+        model_backend,
+        buy_threshold,
+        sell_threshold,
+    )
 
     cycle_count = 0
     while True:
@@ -83,7 +104,17 @@ def run_ai_bot(model_dir: str = "models/ai_registry", lookback_days: int = 420, 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run AI-driven paper trading bot")
     parser.add_argument("--model-dir", type=str, default="models/ai_registry", help="Model registry directory")
+    parser.add_argument("--model-path", type=str, default="", help="Specific model bundle path (optional)")
     parser.add_argument("--lookback-days", type=int, default=420, help="Feature lookback window")
     parser.add_argument("--max-cycles", type=int, default=0, help="Run fixed number of cycles then stop (0=infinite)")
+    parser.add_argument("--buy-threshold", type=float, default=0.58, help="BUY probability threshold")
+    parser.add_argument("--sell-threshold", type=float, default=0.42, help="SELL probability threshold")
     cli_args = parser.parse_args()
-    run_ai_bot(model_dir=cli_args.model_dir, lookback_days=cli_args.lookback_days, max_cycles=cli_args.max_cycles)
+    run_ai_bot(
+        model_dir=cli_args.model_dir,
+        model_path=cli_args.model_path,
+        lookback_days=cli_args.lookback_days,
+        max_cycles=cli_args.max_cycles,
+        buy_threshold=cli_args.buy_threshold,
+        sell_threshold=cli_args.sell_threshold,
+    )

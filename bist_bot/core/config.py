@@ -22,7 +22,7 @@ EXCLUDED_TICKERS: List[str] = [
 ]
 
 TICKERS: List[str] = [ticker for ticker in BIST_30_TICKERS if ticker not in EXCLUDED_TICKERS]
-DATA_INTERVAL: str = "1d"  # e.g., "1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"
+DATA_INTERVAL: str = "1h"  # e.g., "1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"
 DATA_POLLING_INTERVAL_SECONDS: int = 60 # How often to fetch new data
 
 # --- Paper Trading Configuration ---
