@@ -1,0 +1,16 @@
+﻿{
+    "name":  "bist100_1h_best_v1_20260212",
+    "created_at":  "2026-02-12T12:34:21.5676287+03:00",
+    "source_model_path":  "models/ai_registry/ai_model_20260212_111005.joblib",
+    "pinned_model_path":  "models/ai_registry/pinned/bist100_1h_best_v1_20260212.joblib",
+    "sha256":  "D504636732B57F1C8323D4965E3ECDA998E9AE5692285789D1069784DEF5ECBF",
+    "backend":  "sklearn_hgb",
+    "interval":  "1h",
+    "universe":  "bist100",
+    "avg_fold_auc":  0.5247159091655126,
+    "avg_fold_policy_return_pct":  3.1868254958118416,
+    "rows":  387642,
+    "symbols":  96,
+    "folds":  4,
+    "report_path":  "reports/ai_training_bist100_1h_best.json"
+}
