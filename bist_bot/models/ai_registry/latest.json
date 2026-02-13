@@ -1,5 +1,5 @@
 {
-  "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260212_111005.joblib",
-  "created_at": "2026-02-12T11:10:05.175664",
-  "model_backend": "sklearn_hgb"
+  "model_path": "ai_model_20260213_125849.joblib",
+  "created_at": "2026-02-13T12:58:49.520557",
+  "model_backend": "catboost"
 }

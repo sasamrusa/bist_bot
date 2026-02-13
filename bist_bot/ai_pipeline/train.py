@@ -107,6 +107,8 @@ def _walk_forward_windows(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Train AI-based BIST trading model")
     parser.add_argument("--years", type=int, default=2, help="History years to download")
+    parser.add_argument("--start-date", type=str, default="", help="Optional explicit start date YYYY-MM-DD")
+    parser.add_argument("--end-date", type=str, default="", help="Optional explicit end date YYYY-MM-DD")
     parser.add_argument("--interval", type=str, default="1h", help="Bar interval")
     parser.add_argument("--universe", type=str, default="config", help="Symbol universe: config | bist100")
     parser.add_argument("--model-backend", type=str, default="auto", help="auto | lightgbm | catboost | sklearn_hgb")
@@ -129,14 +131,24 @@ def main() -> None:
     if args.buy_threshold <= args.sell_threshold:
         raise ValueError("buy-threshold must be greater than sell-threshold")
 
-    end = datetime.now()
-    if args.interval == "1h":
+    if args.end_date:
+        end = datetime.strptime(args.end_date, "%Y-%m-%d")
+    else:
+        end = datetime.now()
+
+    if args.start_date:
+        start = datetime.strptime(args.start_date, "%Y-%m-%d")
+    elif args.interval == "1h":
         # Yahoo intraday window is ~730 days; keep safe headroom.
         intraday_days = min(args.years * 365, 700)
         start = end - timedelta(days=intraday_days)
     else:
         start = end - timedelta(days=(args.years * 365) + 20)
-    if args.interval == "1h" and args.years > 2:
+
+    if end <= start:
+        raise ValueError("end-date must be after start-date")
+
+    if args.interval == "1h" and not args.start_date and args.years > 2:
         print("warning: 1h data on Yahoo has ~730 day limit, clamping years to 2")
         args.years = 2
 
@@ -260,6 +272,8 @@ def main() -> None:
             "universe": args.universe,
             "model_backend_requested": args.model_backend,
             "years": args.years,
+            "start_date": start.strftime("%Y-%m-%d"),
+            "end_date": end.strftime("%Y-%m-%d"),
             "horizon_bars": args.horizon_bars,
             "min_abs_move": args.min_abs_move,
             "buy_threshold": args.buy_threshold,

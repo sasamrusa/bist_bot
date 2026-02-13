@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import gc
 import json
 import os
+import logging
 from bisect import bisect_left
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -47,11 +49,19 @@ from bist_bot.core.config import (
 from bist_bot.data.yf_provider import YFDataProvider
 from bist_bot.execution.paper_broker import PaperBroker
 from bist_bot.strategies.ai_model_strategy import AIModelStrategy
+from bist_bot.strategies.hybrid_ai_rsi_strategy import HybridAiRsiStrategy
 from bist_bot.strategies.rsi_macd import RsiMacdStrategy
 from bist_bot.utils.logger import setup_logger
 
 
 LOGGER = setup_logger("bist_bot.gui")
+AI_DEFAULT_BUY_THRESHOLD = 0.54
+AI_DEFAULT_SELL_THRESHOLD = 0.50
+HYBRID_DEFAULT_MODE = "weighted"
+HYBRID_DEFAULT_BUY_THRESHOLD = 0.54
+HYBRID_DEFAULT_SELL_THRESHOLD = 0.50
+HYBRID_DEFAULT_PROBABILITY_MARGIN = 0.0
+TRADE_TABLE_MAX_ROWS = 2500
 
 
 class WorkerSignals(QObject):
@@ -124,14 +134,46 @@ class BacktestWorker(QRunnable):
 
     def run(self) -> None:
         try:
+            # Keep all-tickers runs responsive by suppressing per-symbol INFO logs.
+            logging.getLogger("bist_bot.data").setLevel(logging.WARNING)
+            logging.getLogger("bist_bot.backtest").setLevel(logging.WARNING)
+            logging.getLogger("bist_bot.strategy").setLevel(logging.WARNING)
+            logging.getLogger("bist_bot.ai_strategy").setLevel(logging.WARNING)
+
             provider = YFDataProvider()
             if self.strategy_mode == "ai_model":
-                strategy = AIModelStrategy()
+                strategy = AIModelStrategy(
+                    buy_threshold=AI_DEFAULT_BUY_THRESHOLD,
+                    sell_threshold=AI_DEFAULT_SELL_THRESHOLD,
+                )
+            elif self.strategy_mode == "hybrid_ai":
+                strategy = HybridAiRsiStrategy(
+                    mode=HYBRID_DEFAULT_MODE,
+                    buy_threshold=HYBRID_DEFAULT_BUY_THRESHOLD,
+                    sell_threshold=HYBRID_DEFAULT_SELL_THRESHOLD,
+                    probability_margin=HYBRID_DEFAULT_PROBABILITY_MARGIN,
+                )
             else:
                 strategy = RsiMacdStrategy()
             engine = BacktestEngine(provider, strategy)
             if self.symbol == "__ALL__":
                 results = engine.run_multi(self.symbols, self.interval, self.start, self.end)
+                # Prevent UI freezes on repeated all-ticker runs by stripping heavy
+                # chart payload from non-best symbols before crossing threads.
+                candidates = [item for item in results.values() if item.data_points > 0]
+                best_symbol = None
+                if candidates:
+                    best = max(candidates, key=lambda r: (r.profit_loss_pct, r.has_strategy_trades, r.trades))
+                    best_symbol = best.symbol
+
+                for sym, result in results.items():
+                    if best_symbol is not None and sym == best_symbol:
+                        continue
+                    result.buy_markers = []
+                    result.sell_markers = []
+                    result.equity_curve = []
+                    result.price_series = []
+                    result.ohlc_series = []
                 try:
                     self.signals.finished.emit(results)
                 except RuntimeError:
@@ -190,7 +232,17 @@ class LiveSimWorker(QRunnable):
         try:
             provider = YFDataProvider()
             if self.strategy_mode == "ai_model":
-                strategy = AIModelStrategy()
+                strategy = AIModelStrategy(
+                    buy_threshold=AI_DEFAULT_BUY_THRESHOLD,
+                    sell_threshold=AI_DEFAULT_SELL_THRESHOLD,
+                )
+            elif self.strategy_mode == "hybrid_ai":
+                strategy = HybridAiRsiStrategy(
+                    mode=HYBRID_DEFAULT_MODE,
+                    buy_threshold=HYBRID_DEFAULT_BUY_THRESHOLD,
+                    sell_threshold=HYBRID_DEFAULT_SELL_THRESHOLD,
+                    probability_margin=HYBRID_DEFAULT_PROBABILITY_MARGIN,
+                )
             else:
                 strategy = RsiMacdStrategy()
 
@@ -463,6 +515,7 @@ class BistBotWindow(QMainWindow):
         self.bt_strategy = QComboBox()
         self.bt_strategy.addItem("RSI + MACD", "rsi_macd")
         self.bt_strategy.addItem("AI Model (Best)", "ai_model")
+        self.bt_strategy.addItem("Hybrid (AI + RSI/MACD)", "hybrid_ai")
         self.bt_strategy.currentIndexChanged.connect(self._on_strategy_changed)
 
         self.bt_symbol = QComboBox()
@@ -786,6 +839,9 @@ class BistBotWindow(QMainWindow):
         if mode == "ai_model":
             self.strategy_subtitle.setText("AI Model Strategy (latest trained model)")
             self.status_bar.showMessage("Strategy switched: AI Model (Best)", 3000)
+        elif mode == "hybrid_ai":
+            self.strategy_subtitle.setText("Hybrid Strategy (AI + RSI/MACD)")
+            self.status_bar.showMessage("Strategy switched: Hybrid AI + RSI/MACD", 3000)
         else:
             self.strategy_subtitle.setText("RSI + MACD + Trend Strategy")
             self.status_bar.showMessage("Strategy switched: RSI + MACD", 3000)
@@ -1131,7 +1187,17 @@ class BistBotWindow(QMainWindow):
             self.bt_run.setEnabled(True)
             return
 
-        best = max(results.values(), key=lambda r: r.profit_loss_pct)
+        candidates = [item for item in results.values() if item.data_points > 0]
+        if not candidates:
+            self.status_bar.showMessage("No historical data returned for selected universe/range.", 7000)
+            self.bt_run.setEnabled(True)
+            return
+
+        best = max(candidates, key=lambda r: (r.profit_loss_pct, r.has_strategy_trades, r.trades))
+        if not best.ohlc_series:
+            with_chart = [item for item in candidates if item.ohlc_series]
+            if with_chart:
+                best = max(with_chart, key=lambda r: (r.profit_loss_pct, r.has_strategy_trades, r.trades))
         self.current_result = best
         LOGGER.info("gui_backtest_multi_best symbol=%s pnl=%.2f", best.symbol, best.profit_loss)
         self._render_result_metrics(best, best_mode=True)
@@ -1141,6 +1207,7 @@ class BistBotWindow(QMainWindow):
             self.status_bar.showMessage("No strategy trades for best ticker.", 7000)
         self.bt_run.setEnabled(True)
         self.status_bar.showMessage("Multi-ticker analysis complete", 5000)
+        gc.collect()
 
     def _render_result_metrics(self, result: BacktestResult, best_mode: bool = False) -> None:
         self.bt_initial_cash.setText(f"{result.initial_cash:,.2f} TRY")
@@ -1185,12 +1252,14 @@ class BistBotWindow(QMainWindow):
         rows: List[Dict[str, object]] = []
         for result in result_list:
             for trade in result.closed_trades:
+                entry_ts = self._normalize_ts(trade.get("entry_ts"))
+                exit_ts = self._normalize_ts(trade.get("exit_ts"))
                 rows.append(
                     {
                         "symbol": trade.get("symbol", result.symbol),
-                        "entry_ts": pd.to_datetime(trade.get("entry_ts")),
+                        "entry_ts": entry_ts,
                         "entry_fill_price": float(trade.get("entry_fill_price", 0.0)),
-                        "exit_ts": pd.to_datetime(trade.get("exit_ts")),
+                        "exit_ts": exit_ts,
                         "exit_fill_price": float(trade.get("exit_fill_price", 0.0)),
                         "quantity": float(trade.get("quantity", 0.0)),
                         "net_pnl": float(trade.get("net_pnl", 0.0)),
@@ -1201,10 +1270,11 @@ class BistBotWindow(QMainWindow):
                 )
             if result.open_trade:
                 open_trade = result.open_trade
+                entry_ts = self._normalize_ts(open_trade.get("entry_ts"))
                 rows.append(
                     {
                         "symbol": open_trade.get("symbol", result.symbol),
-                        "entry_ts": pd.to_datetime(open_trade.get("entry_ts")),
+                        "entry_ts": entry_ts,
                         "entry_fill_price": float(open_trade.get("entry_fill_price", 0.0)),
                         "exit_ts": None,
                         "exit_fill_price": float(open_trade.get("mark_price", 0.0)),
@@ -1216,24 +1286,40 @@ class BistBotWindow(QMainWindow):
                     }
                 )
 
-        rows.sort(
-            key=lambda row: (
-                row["exit_ts"] if row["exit_ts"] is not None else row["entry_ts"],
-                row["symbol"],
-            ),
-            reverse=True,
-        )
+        def _sort_key(row: Dict[str, object]) -> Tuple[pd.Timestamp, str]:
+            exit_ts = row.get("exit_ts")
+            entry_ts = row.get("entry_ts")
+            primary = exit_ts if isinstance(exit_ts, pd.Timestamp) and not pd.isna(exit_ts) else entry_ts
+            if not isinstance(primary, pd.Timestamp) or pd.isna(primary):
+                primary = pd.Timestamp.min
+            return primary, str(row.get("symbol", ""))
 
+        rows.sort(key=_sort_key, reverse=True)
+        max_rows = TRADE_TABLE_MAX_ROWS
+        truncated = len(rows) > max_rows
+        if truncated:
+            rows = rows[:max_rows]
+
+        self.signal_table.setUpdatesEnabled(False)
         self.signal_table.setSortingEnabled(False)
+        self.signal_table.clearContents()
         self.signal_table.setRowCount(len(rows))
         for row_idx, row in enumerate(rows):
             symbol_item = QTableWidgetItem(str(row["symbol"]))
             entry_ts = row["entry_ts"]
-            entry_item = QTableWidgetItem(entry_ts.strftime("%Y-%m-%d %H:%M") if hasattr(entry_ts, "strftime") else "-")
+            entry_item = QTableWidgetItem(
+                entry_ts.strftime("%Y-%m-%d %H:%M")
+                if isinstance(entry_ts, pd.Timestamp) and not pd.isna(entry_ts)
+                else "-"
+            )
             entry_price_item = QTableWidgetItem(f"{float(row['entry_fill_price']):,.2f}")
 
             exit_ts = row["exit_ts"]
-            exit_item = QTableWidgetItem(exit_ts.strftime("%Y-%m-%d %H:%M") if hasattr(exit_ts, "strftime") else "-")
+            exit_item = QTableWidgetItem(
+                exit_ts.strftime("%Y-%m-%d %H:%M")
+                if isinstance(exit_ts, pd.Timestamp) and not pd.isna(exit_ts)
+                else "-"
+            )
             exit_price_item = QTableWidgetItem(
                 f"{float(row['exit_fill_price']):,.2f}" if row["status"] != "OPEN" else f"{float(row['exit_fill_price']):,.2f} (mark)"
             )
@@ -1270,7 +1356,12 @@ class BistBotWindow(QMainWindow):
             self.signal_table.setItem(row_idx, 9, status_item)
 
         self.signal_table.setSortingEnabled(True)
-        self.signal_table.sortItems(1, Qt.DescendingOrder)
+        self.signal_table.setUpdatesEnabled(True)
+        if truncated:
+            self.status_bar.showMessage(
+                f"Trade journal truncated to latest {max_rows} rows for performance.",
+                8000,
+            )
 
     def _load_live_sim_state(self) -> Dict[str, Any]:
         state_path = Path(self.live_sim_state_path)
@@ -1499,7 +1590,12 @@ class BistBotWindow(QMainWindow):
         total_trades = int(summary.get("trade_count_total", 0))
         open_positions = len([row for row in self.live_open_positions if float(row.get("quantity", 0.0)) > 0])
         strategy_mode = str(summary.get("strategy_mode", self.current_strategy_mode))
-        strategy_label = "AI Model" if strategy_mode == "ai_model" else "RSI+MACD"
+        if strategy_mode == "ai_model":
+            strategy_label = "AI Model"
+        elif strategy_mode == "hybrid_ai":
+            strategy_label = "Hybrid AI+RSI"
+        else:
+            strategy_label = "RSI+MACD"
         range_text = f"{start.strftime('%Y-%m-%d')} -> {end.strftime('%Y-%m-%d')}"
 
         self.chart_symbol.setText(f"{symbol} - {interval} [{strategy_label} | Live Sim | Range {range_text}]")
@@ -1527,7 +1623,16 @@ class BistBotWindow(QMainWindow):
 
         if not result.ohlc_series:
             ax.set_title("No data to plot")
-            self.canvas.draw_idle()
+            interval = self.bt_interval.currentText()
+            self.chart_symbol.setText(f"{result.symbol} - {interval} [No data]")
+            self.chart_stats.setText(
+                f"No OHLC data in selected range ({result.start.strftime('%Y-%m-%d')} -> {result.end.strftime('%Y-%m-%d')})."
+            )
+            self.latest_price_label.setText(f"Last Price ({result.symbol}): -")
+            self._ts_values = []
+            self._visible_highs = []
+            self._visible_lows = []
+            self.canvas.draw()
             return
 
         candles = result.ohlc_series
@@ -1623,7 +1728,12 @@ class BistBotWindow(QMainWindow):
 
         last = candles[-1]
         last_close = float(last["close"])
-        strategy_label = "AI Model" if self.current_strategy_mode == "ai_model" else "RSI+MACD"
+        if self.current_strategy_mode == "ai_model":
+            strategy_label = "AI Model"
+        elif self.current_strategy_mode == "hybrid_ai":
+            strategy_label = "Hybrid AI+RSI"
+        else:
+            strategy_label = "RSI+MACD"
         self.chart_symbol.setText(f"{result.symbol} - {self.bt_interval.currentText()} [{strategy_label}]")
         self.chart_stats.setText(
             "O {0:,.2f}  H {1:,.2f}  L {2:,.2f}  C {3:,.2f}   |   PnL {4:+.2f}%   Trades {5}   |   SL 1.5x ATR / TP 3x ATR".format(
@@ -1637,7 +1747,7 @@ class BistBotWindow(QMainWindow):
         )
         self.latest_price_label.setText(f"Last Price ({result.symbol}): {last_close:,.2f} TRY")
 
-        self.canvas.draw_idle()
+        self.canvas.draw()
 
     def _redraw_current_result(self) -> None:
         if self.current_result is not None:

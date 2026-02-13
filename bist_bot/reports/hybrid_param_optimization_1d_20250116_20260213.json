@@ -1,0 +1,929 @@
+{
+  "meta": {
+    "created_at": "2026-02-13T12:54:39.439018",
+    "interval": "1d",
+    "universe": "bist100",
+    "symbols_requested": 104,
+    "symbols_loaded": 97,
+    "opt_window": {
+      "start": "2022-01-01",
+      "end": "2024-12-31"
+    },
+    "eval_window": {
+      "start": "2025-01-16",
+      "end": "2026-02-13"
+    },
+    "search": {
+      "trials": 18,
+      "coarse_size": 30,
+      "stage2_top": 6,
+      "modes": [
+        "consensus",
+        "ai_lead",
+        "classic_lead",
+        "weighted",
+        "probability_gate"
+      ],
+      "margins": [
+        0.0,
+        0.02,
+        0.04,
+        0.06,
+        0.08,
+        0.1
+      ],
+      "buy_thresholds": [
+        0.54,
+        0.56,
+        0.58,
+        0.6,
+        0.62
+      ],
+      "sell_thresholds": [
+        0.4,
+        0.42,
+        0.44,
+        0.46,
+        0.48,
+        0.5
+      ],
+      "seed": 42
+    },
+    "model": {
+      "dir": "bist_bot/models/ai_registry",
+      "path": "latest"
+    }
+  },
+  "stage1_trials": [
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.4,
+        "key": "probability_gate|m=0.020|b=0.580|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 127.88835033779915,
+        "median_pnl_pct": 97.45422480701575,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 144,
+        "avg_trades_per_active_symbol": 4.8,
+        "total_profit_loss_try": 3836650.5101339743,
+        "total_fees_try": 4169.483861861351,
+        "total_slippage_try": 2606.2514245959965,
+        "strategy": "hybrid",
+        "score": 107.8393525111219
+      }
+    },
+    {
+      "candidate": {
+        "mode": "ai_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.44,
+        "key": "ai_lead|m=0.000|b=0.560|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 107.34490792086187,
+        "median_pnl_pct": 101.78355557009667,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 339,
+        "avg_trades_per_active_symbol": 11.3,
+        "total_profit_loss_try": 3220347.2376258564,
+        "total_fees_try": 9076.600893348885,
+        "total_slippage_try": 5673.366944048354,
+        "strategy": "hybrid",
+        "score": 103.95126851033467
+      }
+    },
+    {
+      "candidate": {
+        "mode": "weighted",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.44,
+        "key": "weighted|m=0.000|b=0.580|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 105.36077951080999,
+        "median_pnl_pct": 100.50474697032598,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 327,
+        "avg_trades_per_active_symbol": 10.9,
+        "total_profit_loss_try": 3160823.3853243,
+        "total_fees_try": 8745.623736182557,
+        "total_slippage_try": 5466.475422359903,
+        "strategy": "hybrid",
+        "score": 102.63152566313681
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.06,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.060|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 110.8859391298951,
+        "median_pnl_pct": 90.11498084432091,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 244,
+        "avg_trades_per_active_symbol": 8.133333333333333,
+        "total_profit_loss_try": 3326578.173896853,
+        "total_fees_try": 6718.356476653117,
+        "total_slippage_try": 4199.426045567146,
+        "strategy": "hybrid",
+        "score": 99.05214995191227
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.020|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 99.86231997170216,
+        "median_pnl_pct": 96.86400552146034,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 532,
+        "avg_trades_per_active_symbol": 17.733333333333334,
+        "total_profit_loss_try": 2995869.599151065,
+        "total_fees_try": 13753.103364010463,
+        "total_slippage_try": 8596.16348368185,
+        "strategy": "hybrid",
+        "score": 98.92384846182108
+      }
+    },
+    {
+      "candidate": {
+        "mode": "classic_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.42,
+        "key": "classic_lead|m=0.000|b=0.560|s=0.420"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 28,
+        "mean_pnl_pct": 120.02443212492159,
+        "median_pnl_pct": 78.59259063692613,
+        "symbol_success_rate_pct": 93.33333333333333,
+        "total_trades": 117,
+        "avg_trades_per_active_symbol": 3.9,
+        "total_profit_loss_try": 3600732.9637476476,
+        "total_fees_try": 4899.818845916671,
+        "total_slippage_try": 3063.019457832014,
+        "strategy": "hybrid",
+        "score": 94.32287639909238
+      }
+    },
+    {
+      "candidate": {
+        "mode": "classic_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.62,
+        "sell_threshold": 0.44,
+        "key": "classic_lead|m=0.000|b=0.620|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 28,
+        "mean_pnl_pct": 120.02443212492159,
+        "median_pnl_pct": 78.59259063692613,
+        "symbol_success_rate_pct": 93.33333333333333,
+        "total_trades": 117,
+        "avg_trades_per_active_symbol": 3.9,
+        "total_profit_loss_try": 3600732.9637476476,
+        "total_fees_try": 4899.818845916671,
+        "total_slippage_try": 3063.019457832014,
+        "strategy": "hybrid",
+        "score": 94.32287639909238
+      }
+    },
+    {
+      "candidate": {
+        "mode": "weighted",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "weighted|m=0.000|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 91.82027278173479,
+        "median_pnl_pct": 87.1273495516223,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 913,
+        "avg_trades_per_active_symbol": 30.433333333333334,
+        "total_profit_loss_try": 2754608.1834520437,
+        "total_fees_try": 22279.75184724698,
+        "total_slippage_try": 13925.318879747458,
+        "strategy": "hybrid",
+        "score": 91.20691178481607
+      }
+    },
+    {
+      "candidate": {
+        "mode": "weighted",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.62,
+        "sell_threshold": 0.4,
+        "key": "weighted|m=0.000|b=0.620|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 107.72391218610612,
+        "median_pnl_pct": 77.84874140551544,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 154,
+        "avg_trades_per_active_symbol": 5.133333333333334,
+        "total_profit_loss_try": 3231717.3655831832,
+        "total_fees_try": 3974.0627889689235,
+        "total_slippage_try": 2484.06426182258,
+        "strategy": "hybrid",
+        "score": 91.05690321894973
+      }
+    },
+    {
+      "candidate": {
+        "mode": "ai_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.48,
+        "key": "ai_lead|m=0.000|b=0.560|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 87.57552944108632,
+        "median_pnl_pct": 84.90286325454531,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 720,
+        "avg_trades_per_active_symbol": 24.0,
+        "total_profit_loss_try": 2627265.88323259,
+        "total_fees_try": 17349.91644440752,
+        "total_slippage_try": 10844.161076803412,
+        "strategy": "hybrid",
+        "score": 88.64941360792204
+      }
+    },
+    {
+      "candidate": {
+        "mode": "ai_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.5,
+        "key": "ai_lead|m=0.000|b=0.540|s=0.500"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 80.19246769219673,
+        "median_pnl_pct": 72.50245818100231,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 1372,
+        "avg_trades_per_active_symbol": 45.733333333333334,
+        "total_profit_loss_try": 2405774.030765902,
+        "total_fees_try": 31571.53044386675,
+        "total_slippage_try": 19732.62074768633,
+        "strategy": "hybrid",
+        "score": 79.76479259254612
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.5,
+        "key": "probability_gate|m=0.000|b=0.560|s=0.500"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 30,
+        "mean_pnl_pct": 77.54208995662529,
+        "median_pnl_pct": 71.254086776245,
+        "symbol_success_rate_pct": 100.0,
+        "total_trades": 1117,
+        "avg_trades_per_active_symbol": 37.233333333333334,
+        "total_profit_loss_try": 2326262.6986987586,
+        "total_fees_try": 25351.48764829116,
+        "total_slippage_try": 15845.06593493807,
+        "strategy": "hybrid",
+        "score": 78.24101480933375
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.1,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.4,
+        "key": "probability_gate|m=0.100|b=0.580|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 28,
+        "mean_pnl_pct": 110.42143417916313,
+        "median_pnl_pct": 54.12429094369772,
+        "symbol_success_rate_pct": 93.33333333333333,
+        "total_trades": 58,
+        "avg_trades_per_active_symbol": 1.9333333333333333,
+        "total_profit_loss_try": 3312643.025374894,
+        "total_fees_try": 2071.7542550073763,
+        "total_slippage_try": 1295.0038563799803,
+        "strategy": "hybrid",
+        "score": 78.03703790317998
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.06,
+        "buy_threshold": 0.6,
+        "sell_threshold": 0.42,
+        "key": "probability_gate|m=0.060|b=0.600|s=0.420"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 30,
+        "profitable_symbols": 26,
+        "mean_pnl_pct": 69.41844831292867,
+        "median_pnl_pct": 37.09795631621583,
+        "symbol_success_rate_pct": 86.66666666666667,
+        "total_trades": 95,
+        "avg_trades_per_active_symbol": 3.1666666666666665,
+        "total_profit_loss_try": 2082553.4493878605,
+        "total_fees_try": 1927.2297346533744,
+        "total_slippage_try": 1204.6070424904374,
+        "strategy": "hybrid",
+        "score": 54.965691894365364
+      }
+    },
+    {
+      "candidate": {
+        "mode": "consensus",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.5,
+        "key": "consensus|m=0.000|b=0.540|s=0.500"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 25,
+        "profitable_symbols": 21,
+        "mean_pnl_pct": 62.830852651604964,
+        "median_pnl_pct": 22.107202163708095,
+        "symbol_success_rate_pct": 70.0,
+        "total_trades": 30,
+        "avg_trades_per_active_symbol": 1.2,
+        "total_profit_loss_try": 1884925.5795481491,
+        "total_fees_try": 821.039679674337,
+        "total_slippage_try": 513.130897849327,
+        "strategy": "hybrid",
+        "score": 42.269926500157844
+      }
+    },
+    {
+      "candidate": {
+        "mode": "consensus",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.46,
+        "key": "consensus|m=0.000|b=0.540|s=0.460"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 14,
+        "profitable_symbols": 12,
+        "mean_pnl_pct": 29.95285018240167,
+        "median_pnl_pct": 0.0,
+        "symbol_success_rate_pct": 40.0,
+        "total_trades": 16,
+        "avg_trades_per_active_symbol": 1.1428571428571428,
+        "total_profit_loss_try": 898585.50547205,
+        "total_fees_try": 337.9712185501134,
+        "total_slippage_try": 211.20694526060996,
+        "strategy": "hybrid",
+        "score": 7.713011988763981
+      }
+    },
+    {
+      "candidate": {
+        "mode": "consensus",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.44,
+        "key": "consensus|m=0.000|b=0.580|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 11,
+        "profitable_symbols": 10,
+        "mean_pnl_pct": 16.101217830811308,
+        "median_pnl_pct": 0.0,
+        "symbol_success_rate_pct": 33.33333333333333,
+        "total_trades": 12,
+        "avg_trades_per_active_symbol": 1.0909090909090908,
+        "total_profit_loss_try": 483036.5349243392,
+        "total_fees_try": 147.74566394850135,
+        "total_slippage_try": 92.3018244778829,
+        "strategy": "hybrid",
+        "score": 2.1982503690162165
+      }
+    },
+    {
+      "candidate": {
+        "mode": "consensus",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.4,
+        "key": "consensus|m=0.000|b=0.540|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 30,
+        "symbols_with_data": 30,
+        "active_symbols": 4,
+        "profitable_symbols": 3,
+        "mean_pnl_pct": 4.2660050623443055,
+        "median_pnl_pct": 0.0,
+        "symbol_success_rate_pct": 10.0,
+        "total_trades": 4,
+        "avg_trades_per_active_symbol": 1.0,
+        "total_profit_loss_try": 127980.15187032917,
+        "total_fees_try": 39.82059348804512,
+        "total_slippage_try": 24.875433213419157,
+        "strategy": "hybrid",
+        "score": -4.992218329426379
+      }
+    }
+  ],
+  "stage2_trials": [
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.4,
+        "key": "probability_gate|m=0.020|b=0.580|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 94,
+        "profitable_symbols": 92,
+        "mean_pnl_pct": 97.45041869241702,
+        "median_pnl_pct": 80.8824431334839,
+        "symbol_success_rate_pct": 97.87234042553192,
+        "total_trades": 405,
+        "avg_trades_per_active_symbol": 4.308510638297872,
+        "total_profit_loss_try": 9160339.357087199,
+        "total_fees_try": 11595.159081827667,
+        "total_slippage_try": 7247.814527281503,
+        "strategy": "hybrid",
+        "score": 88.78133838514329
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.06,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.060|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 94,
+        "profitable_symbols": 90,
+        "mean_pnl_pct": 86.53841007102399,
+        "median_pnl_pct": 79.9519161519591,
+        "symbol_success_rate_pct": 95.74468085106383,
+        "total_trades": 732,
+        "avg_trades_per_active_symbol": 7.787234042553192,
+        "total_profit_loss_try": 8134610.546676256,
+        "total_fees_try": 19082.063069774224,
+        "total_slippage_try": 11927.357358475248,
+        "strategy": "hybrid",
+        "score": 85.09437385011623
+      }
+    },
+    {
+      "candidate": {
+        "mode": "ai_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.44,
+        "key": "ai_lead|m=0.000|b=0.560|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 94,
+        "profitable_symbols": 90,
+        "mean_pnl_pct": 85.00168508353525,
+        "median_pnl_pct": 79.80794272587298,
+        "symbol_success_rate_pct": 95.74468085106383,
+        "total_trades": 1083,
+        "avg_trades_per_active_symbol": 11.52127659574468,
+        "total_profit_loss_try": 7990158.397852314,
+        "total_fees_try": 26572.164328231753,
+        "total_slippage_try": 16608.712877030383,
+        "strategy": "hybrid",
+        "score": 84.55494161416951
+      }
+    },
+    {
+      "candidate": {
+        "mode": "weighted",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.44,
+        "key": "weighted|m=0.000|b=0.580|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 94,
+        "profitable_symbols": 90,
+        "mean_pnl_pct": 82.82126752291774,
+        "median_pnl_pct": 79.37824976802432,
+        "symbol_success_rate_pct": 95.74468085106383,
+        "total_trades": 1013,
+        "avg_trades_per_active_symbol": 10.77659574468085,
+        "total_profit_loss_try": 7785199.147154268,
+        "total_fees_try": 24952.883354924983,
+        "total_slippage_try": 15596.596734243607,
+        "strategy": "hybrid",
+        "score": 83.61196348108444
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.020|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 94,
+        "profitable_symbols": 91,
+        "mean_pnl_pct": 79.63324291949033,
+        "median_pnl_pct": 78.83599015560168,
+        "symbol_success_rate_pct": 96.80851063829788,
+        "total_trades": 1675,
+        "avg_trades_per_active_symbol": 17.819148936170212,
+        "total_profit_loss_try": 7485524.834432091,
+        "total_fees_try": 40665.64341445438,
+        "total_slippage_try": 25417.186952325188,
+        "strategy": "hybrid",
+        "score": 82.42687653370639
+      }
+    },
+    {
+      "candidate": {
+        "mode": "classic_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.42,
+        "key": "classic_lead|m=0.000|b=0.560|s=0.420"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 94,
+        "active_symbols": 92,
+        "profitable_symbols": 82,
+        "mean_pnl_pct": 74.15659823276694,
+        "median_pnl_pct": 47.007126062934695,
+        "symbol_success_rate_pct": 87.2340425531915,
+        "total_trades": 353,
+        "avg_trades_per_active_symbol": 3.8369565217391304,
+        "total_profit_loss_try": 6970720.233880091,
+        "total_fees_try": 11560.6903772469,
+        "total_slippage_try": 7226.462137778256,
+        "strategy": "hybrid",
+        "score": 61.895540231333776
+      }
+    }
+  ],
+  "holdout_trials": [
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.020|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 97,
+        "profitable_symbols": 76,
+        "mean_pnl_pct": 7.992810500094739,
+        "median_pnl_pct": 6.882158697827428,
+        "symbol_success_rate_pct": 78.35051546391753,
+        "total_trades": 829,
+        "avg_trades_per_active_symbol": 8.54639175257732,
+        "total_profit_loss_try": 775302.6185091898,
+        "total_fees_try": 14494.613474761132,
+        "total_slippage_try": 9058.648915555254,
+        "strategy": "hybrid",
+        "score": 18.785422152849982
+      }
+    },
+    {
+      "candidate": {
+        "mode": "ai_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.44,
+        "key": "ai_lead|m=0.000|b=0.560|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 97,
+        "profitable_symbols": 76,
+        "mean_pnl_pct": 8.868607074780677,
+        "median_pnl_pct": 6.882630700793248,
+        "symbol_success_rate_pct": 78.35051546391753,
+        "total_trades": 499,
+        "avg_trades_per_active_symbol": 5.144329896907217,
+        "total_profit_loss_try": 860254.8862537257,
+        "total_fees_try": 8239.934429080873,
+        "total_slippage_try": 5149.5150831103365,
+        "strategy": "hybrid",
+        "score": 18.50354644342001
+      }
+    },
+    {
+      "candidate": {
+        "mode": "weighted",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.44,
+        "key": "weighted|m=0.000|b=0.580|s=0.440"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 97,
+        "profitable_symbols": 76,
+        "mean_pnl_pct": 8.313226029742017,
+        "median_pnl_pct": 6.300015719770076,
+        "symbol_success_rate_pct": 78.35051546391753,
+        "total_trades": 459,
+        "avg_trades_per_active_symbol": 4.731958762886598,
+        "total_profit_loss_try": 806382.9248849757,
+        "total_fees_try": 7417.953815821314,
+        "total_slippage_try": 4635.806473325061,
+        "strategy": "hybrid",
+        "score": 17.93483668162108
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.02,
+        "buy_threshold": 0.58,
+        "sell_threshold": 0.4,
+        "key": "probability_gate|m=0.020|b=0.580|s=0.400"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 96,
+        "profitable_symbols": 76,
+        "mean_pnl_pct": 9.13764004545636,
+        "median_pnl_pct": 5.808162181389926,
+        "symbol_success_rate_pct": 78.35051546391753,
+        "total_trades": 215,
+        "avg_trades_per_active_symbol": 2.2395833333333335,
+        "total_profit_loss_try": 886351.0844092668,
+        "total_fees_try": 3455.9513350749644,
+        "total_slippage_try": 2159.603104318109,
+        "strategy": "hybrid",
+        "score": 17.452654380938483
+      }
+    },
+    {
+      "candidate": {
+        "mode": "probability_gate",
+        "probability_margin": 0.06,
+        "buy_threshold": 0.54,
+        "sell_threshold": 0.48,
+        "key": "probability_gate|m=0.060|b=0.540|s=0.480"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 97,
+        "profitable_symbols": 75,
+        "mean_pnl_pct": 8.043540638003597,
+        "median_pnl_pct": 5.565448491444564,
+        "symbol_success_rate_pct": 77.31958762886599,
+        "total_trades": 349,
+        "avg_trades_per_active_symbol": 3.597938144329897,
+        "total_profit_loss_try": 780223.441886349,
+        "total_fees_try": 5606.407656777726,
+        "total_slippage_try": 3503.615081778265,
+        "strategy": "hybrid",
+        "score": 17.09273152299958
+      }
+    },
+    {
+      "candidate": {
+        "mode": "classic_lead",
+        "probability_margin": 0.0,
+        "buy_threshold": 0.56,
+        "sell_threshold": 0.42,
+        "key": "classic_lead|m=0.000|b=0.560|s=0.420"
+      },
+      "metrics": {
+        "symbols_total": 97,
+        "symbols_with_data": 97,
+        "active_symbols": 88,
+        "profitable_symbols": 57,
+        "mean_pnl_pct": 6.379967661035838,
+        "median_pnl_pct": 3.518919224271638,
+        "symbol_success_rate_pct": 58.76288659793815,
+        "total_trades": 166,
+        "avg_trades_per_active_symbol": 1.8863636363636365,
+        "total_profit_loss_try": 618856.8631204762,
+        "total_fees_try": 3275.805773060113,
+        "total_slippage_try": 2046.9378901335253,
+        "strategy": "hybrid",
+        "score": 12.539304175747146
+      }
+    }
+  ],
+  "best_on_opt_window": {
+    "candidate": {
+      "mode": "probability_gate",
+      "probability_margin": 0.02,
+      "buy_threshold": 0.58,
+      "sell_threshold": 0.4,
+      "key": "probability_gate|m=0.020|b=0.580|s=0.400"
+    },
+    "metrics": {
+      "symbols_total": 97,
+      "symbols_with_data": 94,
+      "active_symbols": 94,
+      "profitable_symbols": 92,
+      "mean_pnl_pct": 97.45041869241702,
+      "median_pnl_pct": 80.8824431334839,
+      "symbol_success_rate_pct": 97.87234042553192,
+      "total_trades": 405,
+      "avg_trades_per_active_symbol": 4.308510638297872,
+      "total_profit_loss_try": 9160339.357087199,
+      "total_fees_try": 11595.159081827667,
+      "total_slippage_try": 7247.814527281503,
+      "strategy": "hybrid",
+      "score": 88.78133838514329
+    }
+  },
+  "best_on_holdout_window": {
+    "candidate": {
+      "mode": "probability_gate",
+      "probability_margin": 0.02,
+      "buy_threshold": 0.54,
+      "sell_threshold": 0.48,
+      "key": "probability_gate|m=0.020|b=0.540|s=0.480"
+    },
+    "metrics": {
+      "symbols_total": 97,
+      "symbols_with_data": 97,
+      "active_symbols": 97,
+      "profitable_symbols": 76,
+      "mean_pnl_pct": 7.992810500094739,
+      "median_pnl_pct": 6.882158697827428,
+      "symbol_success_rate_pct": 78.35051546391753,
+      "total_trades": 829,
+      "avg_trades_per_active_symbol": 8.54639175257732,
+      "total_profit_loss_try": 775302.6185091898,
+      "total_fees_try": 14494.613474761132,
+      "total_slippage_try": 9058.648915555254,
+      "strategy": "hybrid",
+      "score": 18.785422152849982
+    }
+  },
+  "evaluation_ranked": [
+    {
+      "symbols_total": 97,
+      "symbols_with_data": 97,
+      "active_symbols": 97,
+      "profitable_symbols": 81,
+      "mean_pnl_pct": 8.785914265494286,
+      "median_pnl_pct": 7.505865457416133,
+      "symbol_success_rate_pct": 83.50515463917526,
+      "total_trades": 1373,
+      "avg_trades_per_active_symbol": 14.154639175257731,
+      "total_profit_loss_try": 852233.6837529457,
+      "total_fees_try": 24611.134170287238,
+      "total_slippage_try": 15381.416462327901,
+      "strategy": "ai_model_tuned_thresholds",
+      "score": 20.09312339495404
+    },
+    {
+      "symbols_total": 97,
+      "symbols_with_data": 97,
+      "active_symbols": 97,
+      "profitable_symbols": 76,
+      "mean_pnl_pct": 7.992810500094739,
+      "median_pnl_pct": 6.882158697827428,
+      "symbol_success_rate_pct": 78.35051546391753,
+      "total_trades": 829,
+      "avg_trades_per_active_symbol": 8.54639175257732,
+      "total_profit_loss_try": 775302.6185091898,
+      "total_fees_try": 14494.613474761132,
+      "total_slippage_try": 9058.648915555254,
+      "strategy": "hybrid_best",
+      "score": 18.785422152849982
+    },
+    {
+      "symbols_total": 97,
+      "symbols_with_data": 97,
+      "active_symbols": 97,
+      "profitable_symbols": 76,
+      "mean_pnl_pct": 9.194166500033631,
+      "median_pnl_pct": 6.462886575296375,
+      "symbol_success_rate_pct": 78.35051546391753,
+      "total_trades": 329,
+      "avg_trades_per_active_symbol": 3.3917525773195876,
+      "total_profit_loss_try": 891834.1505032623,
+      "total_fees_try": 5362.010058473436,
+      "total_slippage_try": 3350.852798298597,
+      "strategy": "ai_model_default",
+      "score": 18.04219864457759
+    },
+    {
+      "symbols_total": 97,
+      "symbols_with_data": 97,
+      "active_symbols": 88,
+      "profitable_symbols": 57,
+      "mean_pnl_pct": 6.379967661035838,
+      "median_pnl_pct": 3.518919224271638,
+      "symbol_success_rate_pct": 58.76288659793815,
+      "total_trades": 166,
+      "avg_trades_per_active_symbol": 1.8863636363636365,
+      "total_profit_loss_try": 618856.8631204762,
+      "total_fees_try": 3275.805773060113,
+      "total_slippage_try": 2046.9378901335253,
+      "strategy": "rsi_macd",
+      "score": 12.539304175747146
+    }
+  ]
+}

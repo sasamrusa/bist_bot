@@ -84,6 +84,33 @@ class AIModelStrategy(BaseStrategy):
         pred_arr = np.asarray(pred, dtype=float).reshape(-1)
         return pred_arr
 
+    def predict_probability_series(self, historical_data: pd.DataFrame, symbol: str) -> pd.Series:
+        if historical_data.empty:
+            return pd.Series(dtype="float64")
+
+        features = build_feature_frame(historical_data, symbol=symbol)
+        if features.empty:
+            return pd.Series(np.nan, index=historical_data.index, dtype="float64")
+
+        features = features.copy()
+        features["symbol_id"] = int(self.symbol_to_id.get(symbol, -1))
+        for col in self.feature_columns:
+            if col not in features.columns:
+                features[col] = np.nan
+
+        valid_mask = ~features[self.feature_columns].isna().any(axis=1)
+        out = pd.Series(np.nan, index=features.index, dtype="float64")
+        if not bool(valid_mask.any()):
+            return out.reindex(historical_data.index)
+
+        row_data = features.loc[valid_mask, self.feature_columns].to_numpy(dtype=float)
+        probabilities = self._predict_probabilities(row_data)
+        valid_indices = list(np.flatnonzero(valid_mask.to_numpy()))
+        for row_idx, prob_up in zip(valid_indices, probabilities):
+            out.iat[row_idx] = float(prob_up)
+
+        return out.reindex(historical_data.index)
+
     def generate_signals_batch(
         self,
         historical_data: pd.DataFrame,
@@ -93,27 +120,15 @@ class AIModelStrategy(BaseStrategy):
         if historical_data.empty:
             return pd.Series(dtype="object")
 
-        features = build_feature_frame(historical_data, symbol=symbol)
-        if features.empty:
+        probabilities_series = self.predict_probability_series(historical_data, symbol=symbol)
+        if probabilities_series.empty:
             return pd.Series("HOLD", index=historical_data.index, dtype="object")
 
-        features = features.copy()
-        features["symbol_id"] = int(self.symbol_to_id.get(symbol, -1))
-        for col in self.feature_columns:
-            if col not in features.columns:
-                features[col] = np.nan
-
-        valid_mask = ~features[self.feature_columns].isna().any(axis=1)
-        signals = pd.Series("HOLD", index=features.index, dtype="object")
-        if not bool(valid_mask.any()):
-            return signals.reindex(historical_data.index, fill_value="HOLD")
-
-        row_data = features.loc[valid_mask, self.feature_columns].to_numpy(dtype=float)
-        probabilities = self._predict_probabilities(row_data)
-
+        signals = pd.Series("HOLD", index=probabilities_series.index, dtype="object")
         has_position = False
-        valid_indices = list(np.flatnonzero(valid_mask.to_numpy()))
-        for row_idx, prob_up in zip(valid_indices, probabilities):
+        for row_idx, prob_up in enumerate(probabilities_series.to_numpy(dtype=float)):
+            if np.isnan(prob_up):
+                continue
             signal = probability_to_signal(float(prob_up), has_position=has_position, config=self.policy)
             signals.iat[row_idx] = signal
             if signal == "BUY":
@@ -121,7 +136,7 @@ class AIModelStrategy(BaseStrategy):
             elif signal == "SELL":
                 has_position = False
 
-        return signals.reindex(historical_data.index, fill_value="HOLD")
+        return signals.reindex(historical_data.index, fill_value="HOLD").astype("object")
 
     def generate_signal(self, historical_data: pd.DataFrame, current_data: pd.Series, symbol: str) -> str:
         if historical_data.empty:

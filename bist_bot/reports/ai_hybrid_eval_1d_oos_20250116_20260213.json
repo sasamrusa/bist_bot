@@ -1,0 +1,976 @@
+{
+  "meta": {
+    "created_at": "2026-02-13T12:46:03.995160",
+    "interval": "1d",
+    "universe": "bist100",
+    "symbol_count": 104,
+    "start_date": "2025-01-16",
+    "end_date": "2026-02-13",
+    "model_dir": "bist_bot/models/ai_registry",
+    "model_path": "latest",
+    "hybrid_modes": [
+      "consensus",
+      "ai_lead",
+      "classic_lead",
+      "weighted",
+      "probability_gate"
+    ],
+    "hybrid_margin": 0.06,
+    "buy_threshold": 0.58,
+    "sell_threshold": 0.42
+  },
+  "ranked_results": [
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 100,
+      "profitable_symbols": 80,
+      "mean_pnl_pct": 9.201635217538477,
+      "median_pnl_pct": 5.977374587204169,
+      "symbol_success_rate_pct": 80.0,
+      "total_trades": 332,
+      "avg_trades_per_active_symbol": 3.32,
+      "total_profit_loss_try": 920163.5217538478,
+      "total_fees_try": 5370.256487714904,
+      "total_slippage_try": 3355.9942677936656,
+      "top_symbols": [
+        {
+          "symbol": "PASEU.IS",
+          "pnl_pct": 89.24635433883907,
+          "trades": 5
+        },
+        {
+          "symbol": "MAGEN.IS",
+          "pnl_pct": 49.883092662770856,
+          "trades": 1
+        },
+        {
+          "symbol": "SKBNK.IS",
+          "pnl_pct": 47.81905211597663,
+          "trades": 1
+        },
+        {
+          "symbol": "ASELS.IS",
+          "pnl_pct": 45.67393528325297,
+          "trades": 1
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 31.655131658528727,
+          "trades": 5
+        },
+        {
+          "symbol": "DSTKF.IS",
+          "pnl_pct": 31.61229357854166,
+          "trades": 21
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": 27.344795827152513,
+          "trades": 3
+        },
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 24.154450024860708,
+          "trades": 8
+        },
+        {
+          "symbol": "ASTOR.IS",
+          "pnl_pct": 23.893727749600032,
+          "trades": 3
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 22.940104414587317,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "TSPOR.IS",
+          "pnl_pct": -3.2355914190371116,
+          "trades": 2
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -3.375616744319894,
+          "trades": 14
+        },
+        {
+          "symbol": "PGSUS.IS",
+          "pnl_pct": -4.0933823331111485,
+          "trades": 1
+        },
+        {
+          "symbol": "TTRAK.IS",
+          "pnl_pct": -4.332765940776881,
+          "trades": 5
+        },
+        {
+          "symbol": "VESTL.IS",
+          "pnl_pct": -4.757072419751159,
+          "trades": 3
+        },
+        {
+          "symbol": "YEOTK.IS",
+          "pnl_pct": -4.814537115500599,
+          "trades": 5
+        },
+        {
+          "symbol": "EGEEN.IS",
+          "pnl_pct": -5.188857547146704,
+          "trades": 6
+        },
+        {
+          "symbol": "OTKAR.IS",
+          "pnl_pct": -6.701613040324271,
+          "trades": 8
+        },
+        {
+          "symbol": "GSRAY.IS",
+          "pnl_pct": -6.905603238680444,
+          "trades": 3
+        },
+        {
+          "symbol": "FENER.IS",
+          "pnl_pct": -19.058339773596977,
+          "trades": 11
+        }
+      ],
+      "strategy": "hybrid_weighted"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 100,
+      "profitable_symbols": 80,
+      "mean_pnl_pct": 9.201635133847095,
+      "median_pnl_pct": 5.977374587204169,
+      "symbol_success_rate_pct": 80.0,
+      "total_trades": 332,
+      "avg_trades_per_active_symbol": 3.32,
+      "total_profit_loss_try": 920163.5133847095,
+      "total_fees_try": 5370.256494043298,
+      "total_slippage_try": 3355.9942717492668,
+      "top_symbols": [
+        {
+          "symbol": "PASEU.IS",
+          "pnl_pct": 89.24635433883907,
+          "trades": 5
+        },
+        {
+          "symbol": "MAGEN.IS",
+          "pnl_pct": 49.883092662770856,
+          "trades": 1
+        },
+        {
+          "symbol": "SKBNK.IS",
+          "pnl_pct": 47.81905211597663,
+          "trades": 1
+        },
+        {
+          "symbol": "ASELS.IS",
+          "pnl_pct": 45.67393528325297,
+          "trades": 1
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 31.655131658528727,
+          "trades": 5
+        },
+        {
+          "symbol": "DSTKF.IS",
+          "pnl_pct": 31.61229357854166,
+          "trades": 21
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": 27.344795827152513,
+          "trades": 3
+        },
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 24.154450024860708,
+          "trades": 8
+        },
+        {
+          "symbol": "ASTOR.IS",
+          "pnl_pct": 23.893727749600032,
+          "trades": 3
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 22.940104414587317,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "TSPOR.IS",
+          "pnl_pct": -3.2355914190371116,
+          "trades": 2
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -3.375616744319894,
+          "trades": 14
+        },
+        {
+          "symbol": "PGSUS.IS",
+          "pnl_pct": -4.0933823331111485,
+          "trades": 1
+        },
+        {
+          "symbol": "TTRAK.IS",
+          "pnl_pct": -4.332765940776881,
+          "trades": 5
+        },
+        {
+          "symbol": "VESTL.IS",
+          "pnl_pct": -4.757072419751159,
+          "trades": 3
+        },
+        {
+          "symbol": "YEOTK.IS",
+          "pnl_pct": -4.814537115500599,
+          "trades": 5
+        },
+        {
+          "symbol": "EGEEN.IS",
+          "pnl_pct": -5.188857547146704,
+          "trades": 6
+        },
+        {
+          "symbol": "OTKAR.IS",
+          "pnl_pct": -6.701613040324271,
+          "trades": 8
+        },
+        {
+          "symbol": "GSRAY.IS",
+          "pnl_pct": -6.905603238680444,
+          "trades": 3
+        },
+        {
+          "symbol": "FENER.IS",
+          "pnl_pct": -19.058339773596977,
+          "trades": 11
+        }
+      ],
+      "strategy": "ai_model"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 100,
+      "profitable_symbols": 80,
+      "mean_pnl_pct": 9.445050083734484,
+      "median_pnl_pct": 5.829188147482819,
+      "symbol_success_rate_pct": 80.0,
+      "total_trades": 319,
+      "avg_trades_per_active_symbol": 3.19,
+      "total_profit_loss_try": 944505.0083734485,
+      "total_fees_try": 5209.841359923805,
+      "total_slippage_try": 3255.7546833288457,
+      "top_symbols": [
+        {
+          "symbol": "PASEU.IS",
+          "pnl_pct": 89.24635433883907,
+          "trades": 5
+        },
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 54.0914979121777,
+          "trades": 6
+        },
+        {
+          "symbol": "MAGEN.IS",
+          "pnl_pct": 49.883092662770856,
+          "trades": 1
+        },
+        {
+          "symbol": "SKBNK.IS",
+          "pnl_pct": 47.81905211597663,
+          "trades": 1
+        },
+        {
+          "symbol": "ASELS.IS",
+          "pnl_pct": 45.67393528325297,
+          "trades": 1
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 31.655131658528727,
+          "trades": 5
+        },
+        {
+          "symbol": "DSTKF.IS",
+          "pnl_pct": 31.363772431358317,
+          "trades": 19
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": 27.344795827152513,
+          "trades": 3
+        },
+        {
+          "symbol": "ASTOR.IS",
+          "pnl_pct": 23.893727749600032,
+          "trades": 3
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 22.940104414587317,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "ARCLK.IS",
+          "pnl_pct": -2.9296098008514235,
+          "trades": 1
+        },
+        {
+          "symbol": "TSPOR.IS",
+          "pnl_pct": -3.2355914190371116,
+          "trades": 2
+        },
+        {
+          "symbol": "PGSUS.IS",
+          "pnl_pct": -4.0933823331111485,
+          "trades": 1
+        },
+        {
+          "symbol": "TTRAK.IS",
+          "pnl_pct": -4.332765940776881,
+          "trades": 5
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -4.358955212551402,
+          "trades": 12
+        },
+        {
+          "symbol": "VESTL.IS",
+          "pnl_pct": -4.757072419751159,
+          "trades": 3
+        },
+        {
+          "symbol": "YEOTK.IS",
+          "pnl_pct": -4.814537115500599,
+          "trades": 5
+        },
+        {
+          "symbol": "EGEEN.IS",
+          "pnl_pct": -5.188857547146704,
+          "trades": 6
+        },
+        {
+          "symbol": "GSRAY.IS",
+          "pnl_pct": -6.905603238680444,
+          "trades": 3
+        },
+        {
+          "symbol": "FENER.IS",
+          "pnl_pct": -19.058339773596977,
+          "trades": 11
+        }
+      ],
+      "strategy": "hybrid_ai_lead"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 88,
+      "profitable_symbols": 67,
+      "mean_pnl_pct": 5.708066250243577,
+      "median_pnl_pct": 3.86956539491647,
+      "symbol_success_rate_pct": 67.0,
+      "total_trades": 139,
+      "avg_trades_per_active_symbol": 1.5795454545454546,
+      "total_profit_loss_try": 570806.6250243576,
+      "total_fees_try": 2086.2881329509587,
+      "total_slippage_try": 1303.6073906995084,
+      "top_symbols": [
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 76.57459995853401,
+          "trades": 2
+        },
+        {
+          "symbol": "KTLEV.IS",
+          "pnl_pct": 43.30423459085447,
+          "trades": 2
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 30.134242940215334,
+          "trades": 3
+        },
+        {
+          "symbol": "CWENE.IS",
+          "pnl_pct": 21.18019657604414,
+          "trades": 1
+        },
+        {
+          "symbol": "BRSAN.IS",
+          "pnl_pct": 21.044185049441786,
+          "trades": 1
+        },
+        {
+          "symbol": "AKSEN.IS",
+          "pnl_pct": 20.986828649463394,
+          "trades": 1
+        },
+        {
+          "symbol": "ASELS.IS",
+          "pnl_pct": 19.77933720663679,
+          "trades": 1
+        },
+        {
+          "symbol": "ENJSA.IS",
+          "pnl_pct": 19.589876232599316,
+          "trades": 1
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 19.064544795520924,
+          "trades": 1
+        },
+        {
+          "symbol": "EFOR.IS",
+          "pnl_pct": 18.202153493242104,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "TKFEN.IS",
+          "pnl_pct": -3.4241041317049534,
+          "trades": 1
+        },
+        {
+          "symbol": "BSOKE.IS",
+          "pnl_pct": -3.8878545534208824,
+          "trades": 2
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -4.456226241818134,
+          "trades": 4
+        },
+        {
+          "symbol": "VESTL.IS",
+          "pnl_pct": -5.0191815306066125,
+          "trades": 1
+        },
+        {
+          "symbol": "GENIL.IS",
+          "pnl_pct": -6.095709870212653,
+          "trades": 3
+        },
+        {
+          "symbol": "OTKAR.IS",
+          "pnl_pct": -6.4055800278658,
+          "trades": 5
+        },
+        {
+          "symbol": "TTRAK.IS",
+          "pnl_pct": -8.280108052203708,
+          "trades": 2
+        },
+        {
+          "symbol": "KONTR.IS",
+          "pnl_pct": -9.753787391948295,
+          "trades": 3
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": -11.523199912821203,
+          "trades": 1
+        },
+        {
+          "symbol": "FENER.IS",
+          "pnl_pct": -17.827788410390085,
+          "trades": 4
+        }
+      ],
+      "strategy": "hybrid_probability_gate"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 88,
+      "profitable_symbols": 56,
+      "mean_pnl_pct": 6.231579941989472,
+      "median_pnl_pct": 2.003751249994275,
+      "symbol_success_rate_pct": 56.00000000000001,
+      "total_trades": 162,
+      "avg_trades_per_active_symbol": 1.8409090909090908,
+      "total_profit_loss_try": 623157.9941989472,
+      "total_fees_try": 3174.7396675137925,
+      "total_slippage_try": 1983.7666282596608,
+      "top_symbols": [
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 81.00147261711174,
+          "trades": 1
+        },
+        {
+          "symbol": "KTLEV.IS",
+          "pnl_pct": 50.0488553488953,
+          "trades": 1
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 49.74538480269411,
+          "trades": 1
+        },
+        {
+          "symbol": "MAGEN.IS",
+          "pnl_pct": 37.89738549391081,
+          "trades": 1
+        },
+        {
+          "symbol": "HALKB.IS",
+          "pnl_pct": 32.16735890191159,
+          "trades": 1
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 27.085616145299134,
+          "trades": 1
+        },
+        {
+          "symbol": "SOKM.IS",
+          "pnl_pct": 24.12745608392678,
+          "trades": 1
+        },
+        {
+          "symbol": "AKSEN.IS",
+          "pnl_pct": 22.54512307777324,
+          "trades": 1
+        },
+        {
+          "symbol": "CWENE.IS",
+          "pnl_pct": 21.18019657604414,
+          "trades": 1
+        },
+        {
+          "symbol": "BRSAN.IS",
+          "pnl_pct": 21.044185049441786,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "ALTNY.IS",
+          "pnl_pct": -3.7814873005201517,
+          "trades": 2
+        },
+        {
+          "symbol": "ASTOR.IS",
+          "pnl_pct": -4.259619293947878,
+          "trades": 2
+        },
+        {
+          "symbol": "THYAO.IS",
+          "pnl_pct": -4.270501981981972,
+          "trades": 2
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -4.312403230303025,
+          "trades": 2
+        },
+        {
+          "symbol": "BTCIM.IS",
+          "pnl_pct": -5.373874301711883,
+          "trades": 2
+        },
+        {
+          "symbol": "TKFEN.IS",
+          "pnl_pct": -5.574571407046198,
+          "trades": 2
+        },
+        {
+          "symbol": "PGSUS.IS",
+          "pnl_pct": -6.009995164383028,
+          "trades": 2
+        },
+        {
+          "symbol": "SAHOL.IS",
+          "pnl_pct": -7.210291106728968,
+          "trades": 2
+        },
+        {
+          "symbol": "KONTR.IS",
+          "pnl_pct": -10.313253032345514,
+          "trades": 1
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": -14.17174600091469,
+          "trades": 1
+        }
+      ],
+      "strategy": "rsi_macd"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 88,
+      "profitable_symbols": 56,
+      "mean_pnl_pct": 6.231579924422526,
+      "median_pnl_pct": 2.003751249994275,
+      "symbol_success_rate_pct": 56.00000000000001,
+      "total_trades": 162,
+      "avg_trades_per_active_symbol": 1.8409090909090908,
+      "total_profit_loss_try": 623157.9924422527,
+      "total_fees_try": 3174.7396687380856,
+      "total_slippage_try": 1983.7666290244636,
+      "top_symbols": [
+        {
+          "symbol": "KLRHO.IS",
+          "pnl_pct": 81.00147261711174,
+          "trades": 1
+        },
+        {
+          "symbol": "KTLEV.IS",
+          "pnl_pct": 50.0488553488953,
+          "trades": 1
+        },
+        {
+          "symbol": "ECILC.IS",
+          "pnl_pct": 49.74538480269411,
+          "trades": 1
+        },
+        {
+          "symbol": "MAGEN.IS",
+          "pnl_pct": 37.89738549391081,
+          "trades": 1
+        },
+        {
+          "symbol": "HALKB.IS",
+          "pnl_pct": 32.16735890191159,
+          "trades": 1
+        },
+        {
+          "symbol": "GUBRF.IS",
+          "pnl_pct": 27.085616145299134,
+          "trades": 1
+        },
+        {
+          "symbol": "SOKM.IS",
+          "pnl_pct": 24.12745608392678,
+          "trades": 1
+        },
+        {
+          "symbol": "AKSEN.IS",
+          "pnl_pct": 22.54512307777324,
+          "trades": 1
+        },
+        {
+          "symbol": "CWENE.IS",
+          "pnl_pct": 21.18019657604414,
+          "trades": 1
+        },
+        {
+          "symbol": "BRSAN.IS",
+          "pnl_pct": 21.044185049441786,
+          "trades": 1
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "ALTNY.IS",
+          "pnl_pct": -3.7814873005201517,
+          "trades": 2
+        },
+        {
+          "symbol": "ASTOR.IS",
+          "pnl_pct": -4.259619293947878,
+          "trades": 2
+        },
+        {
+          "symbol": "THYAO.IS",
+          "pnl_pct": -4.270501981981972,
+          "trades": 2
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -4.312403230303025,
+          "trades": 2
+        },
+        {
+          "symbol": "BTCIM.IS",
+          "pnl_pct": -5.373874301711883,
+          "trades": 2
+        },
+        {
+          "symbol": "TKFEN.IS",
+          "pnl_pct": -5.574571407046198,
+          "trades": 2
+        },
+        {
+          "symbol": "PGSUS.IS",
+          "pnl_pct": -6.009995164383028,
+          "trades": 2
+        },
+        {
+          "symbol": "SAHOL.IS",
+          "pnl_pct": -7.210291106728968,
+          "trades": 2
+        },
+        {
+          "symbol": "KONTR.IS",
+          "pnl_pct": -10.313253032345514,
+          "trades": 1
+        },
+        {
+          "symbol": "QUAGR.IS",
+          "pnl_pct": -14.17174600091469,
+          "trades": 1
+        }
+      ],
+      "strategy": "hybrid_classic_lead"
+    },
+    {
+      "symbols_total": 104,
+      "symbols_with_data": 100,
+      "active_symbols": 2,
+      "profitable_symbols": 0,
+      "mean_pnl_pct": -0.04989067329628276,
+      "median_pnl_pct": 0.0,
+      "symbol_success_rate_pct": 0.0,
+      "total_trades": 2,
+      "avg_trades_per_active_symbol": 1.0,
+      "total_profit_loss_try": -4989.067329628277,
+      "total_fees_try": 15.004134534327541,
+      "total_slippage_try": 9.372897635136127,
+      "top_symbols": [
+        {
+          "symbol": "AEFES.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "AGHOL.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "AKBNK.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "AKSA.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "AKSEN.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ALARK.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ALTNY.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ANSGR.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ARCLK.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ASELS.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        }
+      ],
+      "bottom_symbols": [
+        {
+          "symbol": "TUREX.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "TURSG.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ULKER.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "VAKBN.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "VESTL.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "YEOTK.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "YKBNK.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "ZOREN.IS",
+          "pnl_pct": 0.0,
+          "trades": 0
+        },
+        {
+          "symbol": "GRTHO.IS",
+          "pnl_pct": -1.2348372087331372,
+          "trades": 1
+        },
+        {
+          "symbol": "TUKAS.IS",
+          "pnl_pct": -3.754230120895139,
+          "trades": 1
+        }
+      ],
+      "strategy": "hybrid_consensus"
+    }
+  ],
+  "winner": {
+    "symbols_total": 104,
+    "symbols_with_data": 100,
+    "active_symbols": 100,
+    "profitable_symbols": 80,
+    "mean_pnl_pct": 9.201635217538477,
+    "median_pnl_pct": 5.977374587204169,
+    "symbol_success_rate_pct": 80.0,
+    "total_trades": 332,
+    "avg_trades_per_active_symbol": 3.32,
+    "total_profit_loss_try": 920163.5217538478,
+    "total_fees_try": 5370.256487714904,
+    "total_slippage_try": 3355.9942677936656,
+    "top_symbols": [
+      {
+        "symbol": "PASEU.IS",
+        "pnl_pct": 89.24635433883907,
+        "trades": 5
+      },
+      {
+        "symbol": "MAGEN.IS",
+        "pnl_pct": 49.883092662770856,
+        "trades": 1
+      },
+      {
+        "symbol": "SKBNK.IS",
+        "pnl_pct": 47.81905211597663,
+        "trades": 1
+      },
+      {
+        "symbol": "ASELS.IS",
+        "pnl_pct": 45.67393528325297,
+        "trades": 1
+      },
+      {
+        "symbol": "ECILC.IS",
+        "pnl_pct": 31.655131658528727,
+        "trades": 5
+      },
+      {
+        "symbol": "DSTKF.IS",
+        "pnl_pct": 31.61229357854166,
+        "trades": 21
+      },
+      {
+        "symbol": "QUAGR.IS",
+        "pnl_pct": 27.344795827152513,
+        "trades": 3
+      },
+      {
+        "symbol": "KLRHO.IS",
+        "pnl_pct": 24.154450024860708,
+        "trades": 8
+      },
+      {
+        "symbol": "ASTOR.IS",
+        "pnl_pct": 23.893727749600032,
+        "trades": 3
+      },
+      {
+        "symbol": "GUBRF.IS",
+        "pnl_pct": 22.940104414587317,
+        "trades": 1
+      }
+    ],
+    "bottom_symbols": [
+      {
+        "symbol": "TSPOR.IS",
+        "pnl_pct": -3.2355914190371116,
+        "trades": 2
+      },
+      {
+        "symbol": "GRTHO.IS",
+        "pnl_pct": -3.375616744319894,
+        "trades": 14
+      },
+      {
+        "symbol": "PGSUS.IS",
+        "pnl_pct": -4.0933823331111485,
+        "trades": 1
+      },
+      {
+        "symbol": "TTRAK.IS",
+        "pnl_pct": -4.332765940776881,
+        "trades": 5
+      },
+      {
+        "symbol": "VESTL.IS",
+        "pnl_pct": -4.757072419751159,
+        "trades": 3
+      },
+      {
+        "symbol": "YEOTK.IS",
+        "pnl_pct": -4.814537115500599,
+        "trades": 5
+      },
+      {
+        "symbol": "EGEEN.IS",
+        "pnl_pct": -5.188857547146704,
+        "trades": 6
+      },
+      {
+        "symbol": "OTKAR.IS",
+        "pnl_pct": -6.701613040324271,
+        "trades": 8
+      },
+      {
+        "symbol": "GSRAY.IS",
+        "pnl_pct": -6.905603238680444,
+        "trades": 3
+      },
+      {
+        "symbol": "FENER.IS",
+        "pnl_pct": -19.058339773596977,
+        "trades": 11
+      }
+    ],
+    "strategy": "hybrid_weighted"
+  }
+}
