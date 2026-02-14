@@ -1,0 +1,935 @@
+{
+  "summary": {
+    "model_path": "bist_bot\\models\\ai_registry\\ai_model_20260213_214510.joblib",
+    "model_backend": "sklearn_hgb",
+    "rows": 372703,
+    "symbols": 80,
+    "folds": 37,
+    "avg_fold_auc": 0.5192437058846691,
+    "avg_fold_policy_return_pct": 15.623431971744388
+  },
+  "folds": [
+    {
+      "fold_id": 1,
+      "train_start": "2000-06-26",
+      "train_end": "2005-06-25",
+      "test_start": "2005-07-01",
+      "test_end": "2006-06-30",
+      "train_rows": 58207,
+      "test_rows": 13129,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5208317465153477,
+        "f1": 0.369702434625789,
+        "auc": 0.5194138531987791
+      },
+      "policy": {
+        "avg_symbol_return_pct": 3.336794025234866,
+        "median_symbol_return_pct": 1.0522393832716581,
+        "trades": 993,
+        "win_rate": 46.82779456193353,
+        "avg_trade_return_pct": 0.15365229668378824
+      }
+    },
+    {
+      "fold_id": 2,
+      "train_start": "2000-12-26",
+      "train_end": "2005-12-25",
+      "test_start": "2005-12-31",
+      "test_end": "2006-12-30",
+      "train_rows": 59171,
+      "test_rows": 13257,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5174624726559554,
+        "f1": 0.4045424927860002,
+        "auc": 0.5025399252710704
+      },
+      "policy": {
+        "avg_symbol_return_pct": 0.1664032309200597,
+        "median_symbol_return_pct": 1.4364652328828997,
+        "trades": 1218,
+        "win_rate": 44.90968801313629,
+        "avg_trade_return_pct": 0.04075258530761951
+      }
+    },
+    {
+      "fold_id": 3,
+      "train_start": "2001-06-26",
+      "train_end": "2006-06-25",
+      "test_start": "2006-07-01",
+      "test_end": "2007-06-30",
+      "train_rows": 60300,
+      "test_rows": 13013,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5094905094905094,
+        "f1": 0.3925002379366137,
+        "auc": 0.5027406379262052
+      },
+      "policy": {
+        "avg_symbol_return_pct": 9.52048768503029,
+        "median_symbol_return_pct": 6.513609857490921,
+        "trades": 1154,
+        "win_rate": 48.00693240901213,
+        "avg_trade_return_pct": 0.4498141524553617
+      }
+    },
+    {
+      "fold_id": 4,
+      "train_start": "2001-12-26",
+      "train_end": "2006-12-25",
+      "test_start": "2006-12-31",
+      "test_end": "2007-12-30",
+      "train_rows": 61395,
+      "test_rows": 13183,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5144504285822651,
+        "f1": 0.40671053851144684,
+        "auc": 0.5196503925571256
+      },
+      "policy": {
+        "avg_symbol_return_pct": 17.84559248535064,
+        "median_symbol_return_pct": 12.555703833613673,
+        "trades": 1148,
+        "win_rate": 52.177700348432055,
+        "avg_trade_return_pct": 0.7838333033892768
+      }
+    },
+    {
+      "fold_id": 5,
+      "train_start": "2002-06-26",
+      "train_end": "2007-06-25",
+      "test_start": "2007-07-01",
+      "test_end": "2008-06-30",
+      "train_rows": 62125,
+      "test_rows": 13926,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5213988223466897,
+        "f1": 0.41158294340955237,
+        "auc": 0.5110660998229085
+      },
+      "policy": {
+        "avg_symbol_return_pct": -8.815564181107744,
+        "median_symbol_return_pct": -15.825300385906443,
+        "trades": 1297,
+        "win_rate": 45.56669236700077,
+        "avg_trade_return_pct": -0.3704680910486835
+      }
+    },
+    {
+      "fold_id": 6,
+      "train_start": "2002-12-26",
+      "train_end": "2007-12-25",
+      "test_start": "2007-12-31",
+      "test_end": "2008-12-30",
+      "train_rows": 63135,
+      "test_rows": 14136,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5321873231465761,
+        "f1": 0.3982163982163982,
+        "auc": 0.5137740580874868
+      },
+      "policy": {
+        "avg_symbol_return_pct": -25.56119423350126,
+        "median_symbol_return_pct": -28.505785987362287,
+        "trades": 1290,
+        "win_rate": 42.945736434108525,
+        "avg_trade_return_pct": -1.217469020210404
+      }
+    },
+    {
+      "fold_id": 7,
+      "train_start": "2003-06-26",
+      "train_end": "2008-06-25",
+      "test_start": "2008-07-01",
+      "test_end": "2009-06-30",
+      "train_rows": 64405,
+      "test_rows": 14240,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5195224719101124,
+        "f1": 0.3648347567768288,
+        "auc": 0.5260297959677704
+      },
+      "policy": {
+        "avg_symbol_return_pct": -1.377039152851019,
+        "median_symbol_return_pct": -1.3044435816647604,
+        "trades": 1141,
+        "win_rate": 50.13146362839615,
+        "avg_trade_return_pct": 0.050374538668096575
+      }
+    },
+    {
+      "fold_id": 8,
+      "train_start": "2003-12-26",
+      "train_end": "2008-12-25",
+      "test_start": "2008-12-31",
+      "test_end": "2009-12-30",
+      "train_rows": 65517,
+      "test_rows": 14179,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.49312363354256294,
+        "f1": 0.3231942744137866,
+        "auc": 0.524170530187469
+      },
+      "policy": {
+        "avg_symbol_return_pct": 18.240488003863312,
+        "median_symbol_return_pct": 13.280249571020653,
+        "trades": 888,
+        "win_rate": 54.5045045045045,
+        "avg_trade_return_pct": 1.1001019701582826
+      }
+    },
+    {
+      "fold_id": 9,
+      "train_start": "2004-06-26",
+      "train_end": "2009-06-25",
+      "test_start": "2009-07-01",
+      "test_end": "2010-06-30",
+      "train_rows": 66776,
+      "test_rows": 14288,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5216965285554311,
+        "f1": 0.4003159003159003,
+        "auc": 0.5357706174526262
+      },
+      "policy": {
+        "avg_symbol_return_pct": 19.570538534745165,
+        "median_symbol_return_pct": 14.896536655695346,
+        "trades": 1202,
+        "win_rate": 53.32778702163061,
+        "avg_trade_return_pct": 0.8709839727057535
+      }
+    },
+    {
+      "fold_id": 10,
+      "train_start": "2004-12-26",
+      "train_end": "2009-12-25",
+      "test_start": "2009-12-31",
+      "test_end": "2010-12-30",
+      "train_rows": 67533,
+      "test_rows": 14933,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.521060737962901,
+        "f1": 0.40100502512562813,
+        "auc": 0.5322920324085108
+      },
+      "policy": {
+        "avg_symbol_return_pct": 18.22129140737055,
+        "median_symbol_return_pct": 19.63079709774226,
+        "trades": 1007,
+        "win_rate": 53.326713008937446,
+        "avg_trade_return_pct": 0.9865244510792534
+      }
+    },
+    {
+      "fold_id": 11,
+      "train_start": "2005-06-26",
+      "train_end": "2010-06-25",
+      "test_start": "2010-07-01",
+      "test_end": "2011-06-30",
+      "train_rows": 68621,
+      "test_rows": 15252,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.520194072908471,
+        "f1": 0.42350716874113753,
+        "auc": 0.5274888471814375
+      },
+      "policy": {
+        "avg_symbol_return_pct": 12.019416401063216,
+        "median_symbol_return_pct": 7.298453926007031,
+        "trades": 1224,
+        "win_rate": 51.71568627450981,
+        "avg_trade_return_pct": 0.5391831458565925
+      }
+    },
+    {
+      "fold_id": 12,
+      "train_start": "2005-12-26",
+      "train_end": "2010-12-25",
+      "test_start": "2010-12-31",
+      "test_end": "2011-12-30",
+      "train_rows": 69706,
+      "test_rows": 15387,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5429258464937935,
+        "f1": 0.4377648093372772,
+        "auc": 0.5406147081923524
+      },
+      "policy": {
+        "avg_symbol_return_pct": 2.612759518496613,
+        "median_symbol_return_pct": 1.570553810320341,
+        "trades": 1279,
+        "win_rate": 48.08444096950743,
+        "avg_trade_return_pct": 0.13059561517703308
+      }
+    },
+    {
+      "fold_id": 13,
+      "train_start": "2006-06-26",
+      "train_end": "2011-06-25",
+      "test_start": "2011-07-01",
+      "test_end": "2012-06-30",
+      "train_rows": 70738,
+      "test_rows": 15399,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5356191960516916,
+        "f1": 0.47684541663618407,
+        "auc": 0.5459073257530345
+      },
+      "policy": {
+        "avg_symbol_return_pct": 8.649176936654449,
+        "median_symbol_return_pct": 4.774425246162162,
+        "trades": 1337,
+        "win_rate": 52.05684367988033,
+        "avg_trade_return_pct": 0.399759171411569
+      }
+    },
+    {
+      "fold_id": 14,
+      "train_start": "2006-12-26",
+      "train_end": "2011-12-25",
+      "test_start": "2011-12-31",
+      "test_end": "2012-12-30",
+      "train_rows": 71727,
+      "test_rows": 15381,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5198621676093882,
+        "f1": 0.4108496210610291,
+        "auc": 0.5295579461690917
+      },
+      "policy": {
+        "avg_symbol_return_pct": 14.426816058794198,
+        "median_symbol_return_pct": 13.314287345169284,
+        "trades": 1137,
+        "win_rate": 52.154793315743184,
+        "avg_trade_return_pct": 0.7315684974973121
+      }
+    },
+    {
+      "fold_id": 15,
+      "train_start": "2007-06-26",
+      "train_end": "2012-06-25",
+      "test_start": "2012-07-01",
+      "test_end": "2013-06-30",
+      "train_rows": 73080,
+      "test_rows": 15511,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5057056282638128,
+        "f1": 0.41036683842190264,
+        "auc": 0.5081987842904969
+      },
+      "policy": {
+        "avg_symbol_return_pct": 8.229511513489577,
+        "median_symbol_return_pct": 5.145096083388401,
+        "trades": 1145,
+        "win_rate": 51.35371179039301,
+        "avg_trade_return_pct": 0.4269884875731089
+      }
+    },
+    {
+      "fold_id": 16,
+      "train_start": "2007-12-26",
+      "train_end": "2012-12-25",
+      "test_start": "2012-12-31",
+      "test_end": "2013-12-30",
+      "train_rows": 73998,
+      "test_rows": 15870,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5186515437933207,
+        "f1": 0.43983280780230255,
+        "auc": 0.5174156318768234
+      },
+      "policy": {
+        "avg_symbol_return_pct": -0.39492027670319196,
+        "median_symbol_return_pct": -0.6200812476539364,
+        "trades": 1260,
+        "win_rate": 48.96825396825397,
+        "avg_trade_return_pct": 0.03617272216459982
+      }
+    },
+    {
+      "fold_id": 17,
+      "train_start": "2008-06-26",
+      "train_end": "2013-06-25",
+      "test_start": "2013-07-01",
+      "test_end": "2014-06-30",
+      "train_rows": 74678,
+      "test_rows": 16130,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5168009919404836,
+        "f1": 0.491186839012926,
+        "auc": 0.5202192756942989
+      },
+      "policy": {
+        "avg_symbol_return_pct": 6.385498408140104,
+        "median_symbol_return_pct": 3.5806655256350517,
+        "trades": 1556,
+        "win_rate": 50.257069408740364,
+        "avg_trade_return_pct": 0.2679397804969683
+      }
+    },
+    {
+      "fold_id": 18,
+      "train_start": "2008-12-26",
+      "train_end": "2013-12-25",
+      "test_start": "2013-12-31",
+      "test_end": "2014-12-30",
+      "train_rows": 75735,
+      "test_rows": 16182,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5031516499814609,
+        "f1": 0.4464334893968604,
+        "auc": 0.5059606248664883
+      },
+      "policy": {
+        "avg_symbol_return_pct": 8.874947453030035,
+        "median_symbol_return_pct": 5.077517376346186,
+        "trades": 1506,
+        "win_rate": 48.539176626826034,
+        "avg_trade_return_pct": 0.3437281226252535
+      }
+    },
+    {
+      "fold_id": 19,
+      "train_start": "2009-06-26",
+      "train_end": "2014-06-25",
+      "test_start": "2014-07-01",
+      "test_end": "2015-06-30",
+      "train_rows": 76559,
+      "test_rows": 16182,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.503584229390681,
+        "f1": 0.46889256198347107,
+        "auc": 0.5050024555141701
+      },
+      "policy": {
+        "avg_symbol_return_pct": -0.5856998773291958,
+        "median_symbol_return_pct": -1.6702083719847438,
+        "trades": 1517,
+        "win_rate": 49.17600527356625,
+        "avg_trade_return_pct": -0.007352994908965101
+      }
+    },
+    {
+      "fold_id": 20,
+      "train_start": "2009-12-26",
+      "train_end": "2014-12-25",
+      "test_start": "2014-12-31",
+      "test_end": "2015-12-30",
+      "train_rows": 77732,
+      "test_rows": 16182,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5191570881226054,
+        "f1": 0.47500168679576277,
+        "auc": 0.5262062783592059
+      },
+      "policy": {
+        "avg_symbol_return_pct": -3.3958425103021472,
+        "median_symbol_return_pct": -6.233694465919709,
+        "trades": 1349,
+        "win_rate": 47.220163083765755,
+        "avg_trade_return_pct": -0.13871696787109014
+      }
+    },
+    {
+      "fold_id": 21,
+      "train_start": "2010-06-26",
+      "train_end": "2015-06-25",
+      "test_start": "2015-07-01",
+      "test_end": "2016-06-30",
+      "train_rows": 78459,
+      "test_rows": 16244,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5138512681605516,
+        "f1": 0.4607715944008194,
+        "auc": 0.5151041058881721
+      },
+      "policy": {
+        "avg_symbol_return_pct": -3.5806411415802937,
+        "median_symbol_return_pct": -5.213003363842078,
+        "trades": 1380,
+        "win_rate": 45.14492753623188,
+        "avg_trade_return_pct": -0.17151165274231203
+      }
+    },
+    {
+      "fold_id": 22,
+      "train_start": "2010-12-26",
+      "train_end": "2015-12-25",
+      "test_start": "2015-12-31",
+      "test_end": "2016-12-30",
+      "train_rows": 79048,
+      "test_rows": 16244,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5246244767298694,
+        "f1": 0.4269813000890472,
+        "auc": 0.5339042869177986
+      },
+      "policy": {
+        "avg_symbol_return_pct": 4.004409388953889,
+        "median_symbol_return_pct": -0.08362854730209479,
+        "trades": 1277,
+        "win_rate": 50.50900548159749,
+        "avg_trade_return_pct": 0.21416897477849536
+      }
+    },
+    {
+      "fold_id": 23,
+      "train_start": "2011-06-26",
+      "train_end": "2016-06-25",
+      "test_start": "2016-07-01",
+      "test_end": "2017-06-30",
+      "train_rows": 79454,
+      "test_rows": 16182,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5187245087133853,
+        "f1": 0.43614248479582973,
+        "auc": 0.5257722620279959
+      },
+      "policy": {
+        "avg_symbol_return_pct": 10.432663383219515,
+        "median_symbol_return_pct": 6.633216310020751,
+        "trades": 1259,
+        "win_rate": 50.833995234312944,
+        "avg_trade_return_pct": 0.4749376151253191
+      }
+    },
+    {
+      "fold_id": 24,
+      "train_start": "2011-12-26",
+      "train_end": "2016-12-25",
+      "test_start": "2016-12-31",
+      "test_end": "2017-12-30",
+      "train_rows": 79844,
+      "test_rows": 16229,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5102594121634112,
+        "f1": 0.4565841651852865,
+        "auc": 0.5233044366923639
+      },
+      "policy": {
+        "avg_symbol_return_pct": 16.66767670336566,
+        "median_symbol_return_pct": 12.95241703524892,
+        "trades": 1354,
+        "win_rate": 55.169867060561295,
+        "avg_trade_return_pct": 0.7164101977738762
+      }
+    },
+    {
+      "fold_id": 25,
+      "train_start": "2012-06-26",
+      "train_end": "2017-06-25",
+      "test_start": "2017-07-01",
+      "test_end": "2018-06-30",
+      "train_rows": 80175,
+      "test_rows": 16494,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5044258518249061,
+        "f1": 0.46371867209027684,
+        "auc": 0.5055379917554497
+      },
+      "policy": {
+        "avg_symbol_return_pct": -5.340089661238013,
+        "median_symbol_return_pct": -7.43895266626724,
+        "trades": 1577,
+        "win_rate": 47.622067216233354,
+        "avg_trade_return_pct": -0.2174611794351521
+      }
+    },
+    {
+      "fold_id": 26,
+      "train_start": "2012-12-26",
+      "train_end": "2017-12-25",
+      "test_start": "2017-12-31",
+      "test_end": "2018-12-30",
+      "train_rows": 80635,
+      "test_rows": 16903,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5142282435070697,
+        "f1": 0.44955419990614737,
+        "auc": 0.5122631137182785
+      },
+      "policy": {
+        "avg_symbol_return_pct": -11.315923548718242,
+        "median_symbol_return_pct": -10.049471366699253,
+        "trades": 1615,
+        "win_rate": 47.368421052631575,
+        "avg_trade_return_pct": -0.4793435856008494
+      }
+    },
+    {
+      "fold_id": 27,
+      "train_start": "2013-06-26",
+      "train_end": "2018-06-25",
+      "test_start": "2018-07-01",
+      "test_end": "2019-06-30",
+      "train_rows": 81152,
+      "test_rows": 17158,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5245949411353305,
+        "f1": 0.41176894786183027,
+        "auc": 0.5204381031605259
+      },
+      "policy": {
+        "avg_symbol_return_pct": 3.4453107111818584,
+        "median_symbol_return_pct": 2.103104539761813,
+        "trades": 1583,
+        "win_rate": 52.242577384712575,
+        "avg_trade_return_pct": 0.10092372350506634
+      }
+    },
+    {
+      "fold_id": 28,
+      "train_start": "2013-12-26",
+      "train_end": "2018-12-25",
+      "test_start": "2018-12-31",
+      "test_end": "2019-12-30",
+      "train_rows": 81728,
+      "test_rows": 17160,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.48892773892773894,
+        "f1": 0.4121983914209115,
+        "auc": 0.5079360942445271
+      },
+      "policy": {
+        "avg_symbol_return_pct": 13.141153894876274,
+        "median_symbol_return_pct": 5.608384873114081,
+        "trades": 1354,
+        "win_rate": 55.686853766617425,
+        "avg_trade_return_pct": 0.5511313643281293
+      }
+    },
+    {
+      "fold_id": 29,
+      "train_start": "2014-06-26",
+      "train_end": "2019-06-25",
+      "test_start": "2019-07-01",
+      "test_end": "2020-06-30",
+      "train_rows": 82248,
+      "test_rows": 16830,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.48193701723113486,
+        "f1": 0.43548073810294596,
+        "auc": 0.4990117827759331
+      },
+      "policy": {
+        "avg_symbol_return_pct": 7.522161938833523,
+        "median_symbol_return_pct": 6.309366972445973,
+        "trades": 1551,
+        "win_rate": 53.90070921985816,
+        "avg_trade_return_pct": 0.375022499400727
+      }
+    },
+    {
+      "fold_id": 30,
+      "train_start": "2014-12-26",
+      "train_end": "2019-12-25",
+      "test_start": "2019-12-31",
+      "test_end": "2020-12-30",
+      "train_rows": 82706,
+      "test_rows": 16651,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.48747822953576364,
+        "f1": 0.43007880325898223,
+        "auc": 0.5011476324915726
+      },
+      "policy": {
+        "avg_symbol_return_pct": 11.053222764230725,
+        "median_symbol_return_pct": 7.100873749784187,
+        "trades": 1378,
+        "win_rate": 54.71698113207547,
+        "avg_trade_return_pct": 0.5694672867122995
+      }
+    },
+    {
+      "fold_id": 31,
+      "train_start": "2015-06-26",
+      "train_end": "2020-06-25",
+      "test_start": "2020-07-01",
+      "test_end": "2021-06-30",
+      "train_rows": 82896,
+      "test_rows": 16829,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5084675262938975,
+        "f1": 0.48066298342541436,
+        "auc": 0.5159624135766192
+      },
+      "policy": {
+        "avg_symbol_return_pct": 16.68011879185657,
+        "median_symbol_return_pct": 7.406561654109689,
+        "trades": 1387,
+        "win_rate": 49.89185291997116,
+        "avg_trade_return_pct": 0.8688315164036792
+      }
+    },
+    {
+      "fold_id": 32,
+      "train_start": "2015-12-26",
+      "train_end": "2020-12-25",
+      "test_start": "2020-12-31",
+      "test_end": "2021-12-30",
+      "train_rows": 83172,
+      "test_rows": 17301,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5207791457141205,
+        "f1": 0.5365826393158571,
+        "auc": 0.5246120486362748
+      },
+      "policy": {
+        "avg_symbol_return_pct": 22.87870445622573,
+        "median_symbol_return_pct": 14.61775713454837,
+        "trades": 1521,
+        "win_rate": 52.33399079552926,
+        "avg_trade_return_pct": 1.0718827922262073
+      }
+    },
+    {
+      "fold_id": 33,
+      "train_start": "2016-06-26",
+      "train_end": "2021-06-25",
+      "test_start": "2021-07-01",
+      "test_end": "2022-06-30",
+      "train_rows": 83531,
+      "test_rows": 18418,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.512759257248344,
+        "f1": 0.5408779289880282,
+        "auc": 0.5104581919119751
+      },
+      "policy": {
+        "avg_symbol_return_pct": 33.89037950700231,
+        "median_symbol_return_pct": 23.441316695378546,
+        "trades": 1644,
+        "win_rate": 55.23114355231144,
+        "avg_trade_return_pct": 1.4019064530584684
+      }
+    },
+    {
+      "fold_id": 34,
+      "train_start": "2016-12-26",
+      "train_end": "2021-12-25",
+      "test_start": "2021-12-31",
+      "test_end": "2022-12-30",
+      "train_rows": 84258,
+      "test_rows": 19509,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5282177456558511,
+        "f1": 0.5933910584908995,
+        "auc": 0.5218576555486123
+      },
+      "policy": {
+        "avg_symbol_return_pct": 128.32126381601825,
+        "median_symbol_return_pct": 94.85152401508226,
+        "trades": 1752,
+        "win_rate": 60.21689497716894,
+        "avg_trade_return_pct": 3.942224638421923
+      }
+    },
+    {
+      "fold_id": 35,
+      "train_start": "2017-06-26",
+      "train_end": "2022-06-25",
+      "test_start": "2022-07-01",
+      "test_end": "2023-06-30",
+      "train_rows": 85731,
+      "test_rows": 19442,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5419709906388231,
+        "f1": 0.6032523947427044,
+        "auc": 0.5370149649053106
+      },
+      "policy": {
+        "avg_symbol_return_pct": 104.51948179329011,
+        "median_symbol_return_pct": 85.97775290730341,
+        "trades": 1806,
+        "win_rate": 57.696566998892585,
+        "avg_trade_return_pct": 3.527146730300459
+      }
+    },
+    {
+      "fold_id": 36,
+      "train_start": "2017-12-26",
+      "train_end": "2022-12-25",
+      "test_start": "2022-12-31",
+      "test_end": "2023-12-30",
+      "train_rows": 87381,
+      "test_rows": 19699,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5197725772881873,
+        "f1": 0.6042172203162915,
+        "auc": 0.5302709169401867
+      },
+      "policy": {
+        "avg_symbol_return_pct": 39.092761856224335,
+        "median_symbol_return_pct": 25.119609158674383,
+        "trades": 1591,
+        "win_rate": 49.717159019484605,
+        "avg_trade_return_pct": 2.1820775345267225
+      }
+    },
+    {
+      "fold_id": 37,
+      "train_start": "2018-06-26",
+      "train_end": "2023-06-25",
+      "test_start": "2023-07-01",
+      "test_end": "2024-06-30",
+      "train_rows": 88779,
+      "test_rows": 19761,
+      "model_backend": "sklearn_hgb",
+      "classification": {
+        "accuracy": 0.5311472091493346,
+        "f1": 0.6236340740138928,
+        "auc": 0.5134012957638086
+      },
+      "policy": {
+        "avg_symbol_return_pct": 78.68486687041158,
+        "median_symbol_return_pct": 65.44555577470263,
+        "trades": 1443,
+        "win_rate": 53.91545391545392,
+        "avg_trade_return_pct": 3.3515410734180837
+      }
+    }
+  ],
+  "skipped_symbols": [
+    "ALTNY.IS",
+    "ASTOR.IS",
+    "BALSU.IS",
+    "CWENE.IS",
+    "DSTKF.IS",
+    "EFOR.IS",
+    "EFORC.IS",
+    "ENERY.IS",
+    "EUPWR.IS",
+    "GLRMK.IS",
+    "GRTHO.IS",
+    "IPEKE.IS",
+    "IZENR.IS",
+    "KOZAA.IS",
+    "KOZAL.IS",
+    "KTLEV.IS",
+    "OBAMS.IS",
+    "PASEU.IS",
+    "PATEK.IS",
+    "REEDR.IS",
+    "TABGD.IS",
+    "TRALT.IS",
+    "TRENJ.IS",
+    "TRMET.IS"
+  ],
+  "symbol_to_id": {
+    "AEFES.IS": 0,
+    "AGHOL.IS": 1,
+    "AKBNK.IS": 2,
+    "AKSA.IS": 3,
+    "AKSEN.IS": 4,
+    "ALARK.IS": 5,
+    "ANSGR.IS": 6,
+    "ARCLK.IS": 7,
+    "ASELS.IS": 8,
+    "BIMAS.IS": 9,
+    "BRSAN.IS": 10,
+    "BRYAT.IS": 11,
+    "BSOKE.IS": 12,
+    "BTCIM.IS": 13,
+    "CANTE.IS": 14,
+    "CCOLA.IS": 15,
+    "CIMSA.IS": 16,
+    "DAPGM.IS": 17,
+    "DOAS.IS": 18,
+    "DOHOL.IS": 19,
+    "ECILC.IS": 20,
+    "EGEEN.IS": 21,
+    "EKGYO.IS": 22,
+    "ENJSA.IS": 23,
+    "ENKAI.IS": 24,
+    "EREGL.IS": 25,
+    "FENER.IS": 26,
+    "FROTO.IS": 27,
+    "GARAN.IS": 28,
+    "GENIL.IS": 29,
+    "GESAN.IS": 30,
+    "GRSEL.IS": 31,
+    "GSRAY.IS": 32,
+    "GUBRF.IS": 33,
+    "HALKB.IS": 34,
+    "HEKTS.IS": 35,
+    "ISCTR.IS": 36,
+    "ISMEN.IS": 37,
+    "KCAER.IS": 38,
+    "KCHOL.IS": 39,
+    "KLRHO.IS": 40,
+    "KONTR.IS": 41,
+    "KRDMD.IS": 42,
+    "KUYAS.IS": 43,
+    "MAGEN.IS": 44,
+    "MAVI.IS": 45,
+    "MGROS.IS": 46,
+    "MIATK.IS": 47,
+    "MPARK.IS": 48,
+    "ODAS.IS": 49,
+    "OTKAR.IS": 50,
+    "OYAKC.IS": 51,
+    "PETKM.IS": 52,
+    "PGSUS.IS": 53,
+    "QUAGR.IS": 54,
+    "RALYH.IS": 55,
+    "SAHOL.IS": 56,
+    "SASA.IS": 57,
+    "SISE.IS": 58,
+    "SKBNK.IS": 59,
+    "SOKM.IS": 60,
+    "TAVHL.IS": 61,
+    "TCELL.IS": 62,
+    "THYAO.IS": 63,
+    "TKFEN.IS": 64,
+    "TOASO.IS": 65,
+    "TSKB.IS": 66,
+    "TSPOR.IS": 67,
+    "TTKOM.IS": 68,
+    "TTRAK.IS": 69,
+    "TUKAS.IS": 70,
+    "TUPRS.IS": 71,
+    "TUREX.IS": 72,
+    "TURSG.IS": 73,
+    "ULKER.IS": 74,
+    "VAKBN.IS": 75,
+    "VESTL.IS": 76,
+    "YEOTK.IS": 77,
+    "YKBNK.IS": 78,
+    "ZOREN.IS": 79
+  }
+}

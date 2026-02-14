@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-02-13T23:23:33.958636",
+  "selection_window": "opt",
+  "interval": "1d",
+  "universe": "bist100",
+  "opt_window": {
+    "start": "2012-01-01",
+    "end": "2024-12-31"
+  },
+  "eval_window": {
+    "start": "2025-01-01",
+    "end": "2026-02-13"
+  },
+  "ai": {
+    "buy_threshold": 0.54,
+    "sell_threshold": 0.36,
+    "opt_score": 250.60705986379196,
+    "eval_score": 20.930956131325914
+  },
+  "hybrid": {
+    "mode": "probability_gate",
+    "probability_margin": 0.06,
+    "buy_threshold": 0.52,
+    "sell_threshold": 0.36,
+    "opt_score": 358.1918963951915,
+    "eval_score": 19.410177872567505
+  }
+}

@@ -1,5 +1,87 @@
+import numpy as np
 import pandas as pd
-import pandas_ta as ta
+
+try:
+    import pandas_ta as ta
+except Exception:
+    class _TaFallback:
+        @staticmethod
+        def ema(series: pd.Series, length: int) -> pd.Series:
+            return series.ewm(span=length, adjust=False, min_periods=length).mean()
+
+        @staticmethod
+        def rsi(series: pd.Series, length: int = 14) -> pd.Series:
+            delta = series.diff()
+            gain = delta.clip(lower=0.0)
+            loss = -delta.clip(upper=0.0)
+            avg_gain = gain.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean()
+            avg_loss = loss.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean()
+            rs = avg_gain / avg_loss.replace(0.0, np.nan)
+            return 100.0 - (100.0 / (1.0 + rs))
+
+        @staticmethod
+        def macd(close: pd.Series, fast: int, slow: int, signal: int) -> pd.DataFrame:
+            ema_fast = _TaFallback.ema(close, fast)
+            ema_slow = _TaFallback.ema(close, slow)
+            macd_line = ema_fast - ema_slow
+            signal_line = macd_line.ewm(span=signal, adjust=False, min_periods=signal).mean()
+            hist = macd_line - signal_line
+            return pd.DataFrame(
+                {
+                    f"MACD_{fast}_{slow}_{signal}": macd_line,
+                    f"MACDs_{fast}_{slow}_{signal}": signal_line,
+                    f"MACDh_{fast}_{slow}_{signal}": hist,
+                }
+            )
+
+        @staticmethod
+        def bbands(close: pd.Series, length: int, std: float) -> pd.DataFrame:
+            mid = close.rolling(length, min_periods=length).mean()
+            sigma = close.rolling(length, min_periods=length).std(ddof=0)
+            upper = mid + (sigma * std)
+            lower = mid - (sigma * std)
+            return pd.DataFrame(
+                {
+                    f"BBU_{length}_{std}": upper,
+                    f"BBM_{length}_{std}": mid,
+                    f"BBL_{length}_{std}": lower,
+                }
+            )
+
+        @staticmethod
+        def atr(high: pd.Series, low: pd.Series, close: pd.Series, length: int) -> pd.Series:
+            prev_close = close.shift(1)
+            tr = pd.concat(
+                [
+                    (high - low).abs(),
+                    (high - prev_close).abs(),
+                    (low - prev_close).abs(),
+                ],
+                axis=1,
+            ).max(axis=1)
+            return tr.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean()
+
+        @staticmethod
+        def adx(high: pd.Series, low: pd.Series, close: pd.Series, length: int) -> pd.DataFrame:
+            up_move = high.diff()
+            down_move = -low.diff()
+            plus_dm = pd.Series(
+                np.where((up_move > down_move) & (up_move > 0.0), up_move, 0.0),
+                index=high.index,
+            )
+            minus_dm = pd.Series(
+                np.where((down_move > up_move) & (down_move > 0.0), down_move, 0.0),
+                index=high.index,
+            )
+
+            atr = _TaFallback.atr(high, low, close, length).replace(0.0, np.nan)
+            plus_di = 100.0 * (plus_dm.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean() / atr)
+            minus_di = 100.0 * (minus_dm.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean() / atr)
+            dx = ((plus_di - minus_di).abs() / (plus_di + minus_di).replace(0.0, np.nan)) * 100.0
+            adx = dx.ewm(alpha=1.0 / length, adjust=False, min_periods=length).mean()
+            return pd.DataFrame({f"ADX_{length}": adx})
+
+    ta = _TaFallback()
 
 from bist_bot.strategies.base_strategy import BaseStrategy
 from bist_bot.core.config import (

@@ -46,6 +46,7 @@ from bist_bot.core.config import (
     ORDER_TYPE,
     TICKERS,
 )
+from bist_bot.core.strategy_tuning import load_strategy_tuning
 from bist_bot.data.yf_provider import YFDataProvider
 from bist_bot.execution.paper_broker import PaperBroker
 from bist_bot.strategies.ai_model_strategy import AIModelStrategy
@@ -55,13 +56,25 @@ from bist_bot.utils.logger import setup_logger
 
 
 LOGGER = setup_logger("bist_bot.gui")
-AI_DEFAULT_BUY_THRESHOLD = 0.54
-AI_DEFAULT_SELL_THRESHOLD = 0.50
-HYBRID_DEFAULT_MODE = "weighted"
-HYBRID_DEFAULT_BUY_THRESHOLD = 0.54
-HYBRID_DEFAULT_SELL_THRESHOLD = 0.50
-HYBRID_DEFAULT_PROBABILITY_MARGIN = 0.0
+_TUNED_DEFAULTS = load_strategy_tuning()
+AI_DEFAULT_BUY_THRESHOLD = float(_TUNED_DEFAULTS["ai"]["buy_threshold"])
+AI_DEFAULT_SELL_THRESHOLD = float(_TUNED_DEFAULTS["ai"]["sell_threshold"])
+HYBRID_DEFAULT_MODE = str(_TUNED_DEFAULTS["hybrid"]["mode"])
+HYBRID_DEFAULT_BUY_THRESHOLD = float(_TUNED_DEFAULTS["hybrid"]["buy_threshold"])
+HYBRID_DEFAULT_SELL_THRESHOLD = float(_TUNED_DEFAULTS["hybrid"]["sell_threshold"])
+HYBRID_DEFAULT_PROBABILITY_MARGIN = float(_TUNED_DEFAULTS["hybrid"]["probability_margin"])
 TRADE_TABLE_MAX_ROWS = 2500
+
+LOGGER.info(
+    "gui_strategy_defaults source=%s ai=(%.3f/%.3f) hybrid=(%s %.3f/%.3f margin=%.3f)",
+    _TUNED_DEFAULTS.get("source_path", "unknown"),
+    AI_DEFAULT_BUY_THRESHOLD,
+    AI_DEFAULT_SELL_THRESHOLD,
+    HYBRID_DEFAULT_MODE,
+    HYBRID_DEFAULT_BUY_THRESHOLD,
+    HYBRID_DEFAULT_SELL_THRESHOLD,
+    HYBRID_DEFAULT_PROBABILITY_MARGIN,
+)
 
 
 class WorkerSignals(QObject):

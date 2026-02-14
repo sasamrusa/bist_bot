@@ -94,13 +94,31 @@ class HybridAiRsiStrategy(BaseStrategy):
                     return "SELL"
             return "HOLD"
 
-        # weighted mode
-        buy_score = (2 if ai == "BUY" else 0) + (1 if classic == "BUY" else 0)
-        sell_score = (2 if ai == "SELL" else 0) + (1 if classic == "SELL" else 0)
-        if buy_score >= 2 and buy_score > sell_score and not has_position:
-            return "BUY"
-        if sell_score >= 2 and sell_score > buy_score and has_position:
-            return "SELL"
+        # weighted mode: avoid mirroring AI one-to-one by requiring either
+        # AI+classic alignment or clearly stronger AI probability confidence.
+        buy_th = float(self.ai_strategy.policy.buy_threshold)
+        sell_th = float(self.ai_strategy.policy.sell_threshold)
+        prob = float(ai_prob) if ai_prob is not None else float("nan")
+
+        if pd.isna(prob):
+            ai_extra_buy = 0.0
+            ai_extra_sell = 0.0
+        else:
+            buy_span = max(1.0 - buy_th, 1e-6)
+            sell_span = max(sell_th, 1e-6)
+            ai_extra_buy = max(0.0, (prob - buy_th) / buy_span) * 1.5
+            ai_extra_sell = max(0.0, (sell_th - prob) / sell_span) * 1.5
+
+        buy_score = (1.0 if ai == "BUY" else 0.0) + (1.0 if classic == "BUY" else 0.0) + ai_extra_buy
+        sell_score = (1.0 if ai == "SELL" else 0.0) + (1.0 if classic == "SELL" else 0.0) + ai_extra_sell
+        required_score = 1.75 + min(self.probability_margin * 2.5, 0.40)
+
+        if not has_position:
+            if buy_score >= required_score and buy_score > (sell_score + 0.10) and classic != "SELL":
+                return "BUY"
+        else:
+            if sell_score >= required_score and sell_score > (buy_score + 0.10) and classic != "BUY":
+                return "SELL"
         return "HOLD"
 
     def generate_signals_batch(
